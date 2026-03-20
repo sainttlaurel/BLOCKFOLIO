@@ -88,3 +88,6 @@ client/src/
 - Just a solo project, built lazily and incrementally. Made by a coder who overthinks everything I see. Mermaid diagrams rendering on GitHub is pretty cool, btw.
 
 P.S. I’ll often update this in the future and proceed with tasks one by one.
+
+![welp](https://github.com/user-attachments/assets/69dc1e14-2689-4c7b-aa75-ab742323f499)
+
