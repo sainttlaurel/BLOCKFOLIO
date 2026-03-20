@@ -23,19 +23,7 @@ More detailed requirements & design: [Click here](https://file.kiwi/cbc2e8b0#Spq
 
 ## System Flow
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-flowchart TB
-Frontend --> TradingInterface
-TradingInterface --> StateManagement
-StateManagement --> ComponentSystem
-ComponentSystem --> Backend
-Backend -.-> ComponentSystem
-TradingInterface -.-> Frontend
-
-%% Dotted arrows are for feedback loops in GitHub
-
-```
+![diagram](https://github.com/user-attachments/assets/55ac9ede-cd43-4b28-8087-0248ed4481c1)
 
 - The flow is simple: Portfolio → Scan → Analyze → Trade → Repeat.
 
@@ -43,20 +31,10 @@ TradingInterface -.-> Frontend
 
 ## Architecture
 
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'background':'#f9f9f9'}}}%%
-flowchart TB
-Frontend --> TradingInterface
-TradingInterface --> StateManagement
-StateManagement --> ComponentSystem
-ComponentSystem --> Backend
-Backend -.-> ComponentSystem
-TradingInterface -.-> Frontend
+![diagram (1)](https://github.com/user-attachments/assets/eac07d0a-e5a6-4203-bacf-63c55cdde53c)
 
-%% Dotted arrows are for feedback loops in GitHub
-```
 - The architecture separates frontend, trading interface, state management, components, and backend for clarity and speed.
-- 
+  
 ---
 
 ## Layout & Components
