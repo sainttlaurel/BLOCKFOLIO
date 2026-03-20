@@ -17,6 +17,8 @@ We took a basic crypto dashboard and gave it a glow-up.
 - Real-time updates, like “oh that just changed”  
 - Quick trading flow, less clicking, more sipping coffee ☕
 
+More detailed requirements & design: [Click here](https://file.kiwi/cbc2e8b0#SpqfZ20pidgKHlBakNFzCw)
+
 ---
 
 ## System Flow
@@ -32,6 +34,7 @@ Backend -.-> ComponentSystem
 TradingInterface -.-> Frontend
 
 %% Dotted arrows are for feedback loops in GitHub
+
 ```
 
 - The flow is simple: Portfolio → Scan → Analyze → Trade → Repeat.
@@ -53,6 +56,7 @@ TradingInterface -.-> Frontend
 %% Dotted arrows are for feedback loops in GitHub
 ```
 - The architecture separates frontend, trading interface, state management, components, and backend for clarity and speed.
+- 
 ---
 
 ## Layout & Components
