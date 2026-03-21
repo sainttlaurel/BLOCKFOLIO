@@ -1,0 +1,70 @@
+{
+  "lastUpdated": "2024-01-01T00:00:00.000Z",
+  "flags": [
+    {
+      "name": "advanced_charts",
+      "description": "Enable advanced charting features with technical indicators",
+      "enabled": true,
+      "strategy": "percentage",
+      "rolloutPercentage": 100,
+      "whitelist": [],
+      "environments": ["development", "staging", "production"],
+      "metadata": {
+        "category": "features",
+        "owner": "trading-team"
+      }
+    },
+    {
+      "name": "real_time_alerts",
+      "description": "Enable real-time price alerts and notifications",
+      "enabled": true,
+      "strategy": "percentage",
+      "rolloutPercentage": 100,
+      "whitelist": [],
+      "environments": ["development", "staging", "production"],
+      "metadata": {
+        "category": "features",
+        "owner": "notifications-team"
+      }
+    },
+    {
+      "name": "portfolio_analytics",
+      "description": "Enable advanced portfolio analytics and insights",
+      "enabled": true,
+      "strategy": "percentage",
+      "rolloutPercentage": 100,
+      "whitelist": [],
+      "environments": ["development", "staging", "production"],
+      "metadata": {
+        "category": "features",
+        "owner": "analytics-team"
+      }
+    },
+    {
+      "name": "beta_features",
+      "description": "Enable beta features for testing",
+      "enabled": true,
+      "strategy": "percentage",
+      "rolloutPercentage": 10,
+      "whitelist": [],
+      "environments": ["development", "staging"],
+      "metadata": {
+        "category": "experimental",
+        "owner": "product-team"
+      }
+    },
+    {
+      "name": "new_trading_interface",
+      "description": "Enable redesigned trading interface",
+      "enabled": false,
+      "strategy": "whitelist",
+      "rolloutPercentage": 0,
+      "whitelist": [],
+      "environments": ["development"],
+      "metadata": {
+        "category": "features",
+        "owner": "ui-team"
+      }
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 {
-  "name": "coinnova-server",
+  "name": "blockfolio-pro-server",
   "version": "1.0.0",
-  "description": "CoinNova Backend API",
+  "description": "Blockfolio Pro Backend API - Professional Trading Platform",
+  "author": "Lazy Coder",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

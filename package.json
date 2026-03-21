@@ -1,7 +1,7 @@
 {
-  "name": "coinnova",
-  "version": "2.0.0",
-  "description": "Modern Crypto Trading Simulator",
+  "name": "blockfolio-pro",
+  "version": "1.0.0",
+  "description": "Professional Cryptocurrency Trading Platform",
   "main": "serve.js",
   "scripts": {
     "start": "node serve.js",
@@ -36,8 +36,8 @@
     "docker:down": "docker-compose down",
     "docker:logs": "docker-compose logs -f"
   },
-  "keywords": ["crypto", "trading", "simulator", "modern", "portfolio"],
-  "author": "CoinNova Team",
+  "keywords": ["crypto", "trading", "professional", "portfolio", "fintech", "blockchain"],
+  "author": "Lazy Coder",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2"

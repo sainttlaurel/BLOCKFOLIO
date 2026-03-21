@@ -1,6 +1,8 @@
 {
-  "name": "coinnova-client",
+  "name": "blockfolio-pro-client",
   "version": "1.0.0",
+  "description": "Professional Cryptocurrency Trading Platform - Frontend",
+  "author": "Lazy Coder",
   "private": true,
   "dependencies": {
     "react": "^18.2.0",
