@@ -1,0 +1,462 @@
+/* Market Movement Animation Styles */
+/* Animated highlighting for significant market movements - Task 3.2.4 */
+/* Requirements: 4.6 - Market data change animation */
+
+/* ===== SIGNIFICANT MOVEMENT ANIMATIONS ===== */
+
+/* Price flash animations for significant changes (>5%) */
+.animate-price-flash-up {
+  animation: significantPriceFlashUp 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 1;
+}
+
+.animate-price-flash-down {
+  animation: significantPriceFlashDown 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes significantPriceFlashUp {
+  0% { 
+    background-color: transparent;
+    transform: scale(1);
+    box-shadow: none;
+    border-color: transparent;
+  }
+  8% { 
+    background-color: rgba(34, 197, 94, 0.08);
+    transform: scale(1.01);
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.15);
+    border-color: rgba(34, 197, 94, 0.2);
+  }
+  15% { 
+    background-color: rgba(34, 197, 94, 0.15);
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.25);
+    border-color: rgba(34, 197, 94, 0.3);
+  }
+  25% { 
+    background-color: rgba(34, 197, 94, 0.2);
+    transform: scale(1.03);
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+    border-color: rgba(34, 197, 94, 0.4);
+  }
+  40% { 
+    background-color: rgba(34, 197, 94, 0.12);
+    transform: scale(1.015);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+    border-color: rgba(34, 197, 94, 0.25);
+  }
+  60% { 
+    background-color: rgba(34, 197, 94, 0.06);
+    transform: scale(1.005);
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.15);
+  }
+  80% { 
+    background-color: rgba(34, 197, 94, 0.03);
+    transform: scale(1.002);
+    box-shadow: 0 0 5px rgba(34, 197, 94, 0.05);
+    border-color: rgba(34, 197, 94, 0.08);
+  }
+  100% { 
+    background-color: transparent;
+    transform: scale(1);
+    box-shadow: none;
+    border-color: transparent;
+  }
+}
+
+@keyframes significantPriceFlashDown {
+  0% { 
+    background-color: transparent;
+    transform: scale(1);
+    box-shadow: none;
+    border-color: transparent;
+  }
+  8% { 
+    background-color: rgba(239, 68, 68, 0.08);
+    transform: scale(1.01);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.2);
+  }
+  15% { 
+    background-color: rgba(239, 68, 68, 0.15);
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.25);
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+  25% { 
+    background-color: rgba(239, 68, 68, 0.2);
+    transform: scale(1.03);
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+    border-color: rgba(239, 68, 68, 0.4);
+  }
+  40% { 
+    background-color: rgba(239, 68, 68, 0.12);
+    transform: scale(1.015);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.25);
+  }
+  60% { 
+    background-color: rgba(239, 68, 68, 0.06);
+    transform: scale(1.005);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.15);
+  }
+  80% { 
+    background-color: rgba(239, 68, 68, 0.03);
+    transform: scale(1.002);
+    box-shadow: 0 0 5px rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.08);
+  }
+  100% { 
+    background-color: transparent;
+    transform: scale(1);
+    box-shadow: none;
+    border-color: transparent;
+  }
+}
+
+/* Volume spike animation for significant volume changes (>20%) */
+.animate-volume-spike {
+  animation: volumeSpike 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes volumeSpike {
+  0% { 
+    transform: scaleY(1);
+    filter: brightness(1);
+  }
+  20% { 
+    transform: scaleY(1.1);
+    filter: brightness(1.1);
+  }
+  40% { 
+    transform: scaleY(1.15);
+    filter: brightness(1.15);
+  }
+  60% { 
+    transform: scaleY(1.08);
+    filter: brightness(1.08);
+  }
+  80% { 
+    transform: scaleY(1.03);
+    filter: brightness(1.03);
+  }
+  100% { 
+    transform: scaleY(1);
+    filter: brightness(1);
+  }
+}
+
+/* Market cap change animation for significant market cap changes (>10%) */
+.animate-market-cap-change {
+  animation: marketCapChange 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes marketCapChange {
+  0% { 
+    background-color: transparent;
+    border-left: 3px solid transparent;
+  }
+  15% { 
+    background-color: rgba(59, 130, 246, 0.05);
+    border-left: 3px solid rgba(59, 130, 246, 0.3);
+  }
+  30% { 
+    background-color: rgba(59, 130, 246, 0.1);
+    border-left: 3px solid rgba(59, 130, 246, 0.5);
+  }
+  50% { 
+    background-color: rgba(59, 130, 246, 0.08);
+    border-left: 3px solid rgba(59, 130, 246, 0.4);
+  }
+  70% { 
+    background-color: rgba(59, 130, 246, 0.04);
+    border-left: 3px solid rgba(59, 130, 246, 0.2);
+  }
+  100% { 
+    background-color: transparent;
+    border-left: 3px solid transparent;
+  }
+}
+
+/* ===== MOVEMENT INDICATOR ANIMATIONS ===== */
+
+/* Live pulse indicator for active significant movements */
+.animate-live-pulse {
+  animation: livePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
+
+/* Movement direction indicators */
+.movement-indicator-up {
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+}
+
+.movement-indicator-down {
+  background: linear-gradient(45deg, #ef4444, #dc2626);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
+/* ===== DATA REFRESH ANIMATIONS ===== */
+
+/* Data refresh shimmer for updated information */
+.animate-data-refresh {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-data-refresh::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(59, 130, 246, 0.1), 
+    rgba(59, 130, 246, 0.2), 
+    rgba(59, 130, 246, 0.1), 
+    transparent
+  );
+  animation: dataRefreshShimmer 1.2s ease-in-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes dataRefreshShimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* ===== VOLUME BAR ANIMATIONS ===== */
+
+/* Volume bar growth animation for new data */
+.animate-volume-bar {
+  animation: volumeBarGrow 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transform-origin: left center;
+}
+
+@keyframes volumeBarGrow {
+  0% {
+    transform: scaleX(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scaleX(1.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* Enhanced volume bar with pulse effect for significant changes */
+.animate-volume-bar-significant {
+  animation: volumeBarSignificant 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transform-origin: left center;
+}
+
+@keyframes volumeBarSignificant {
+  0% {
+    transform: scaleX(0) scaleY(1);
+    opacity: 0.7;
+    filter: brightness(1);
+  }
+  30% {
+    transform: scaleX(1.1) scaleY(1.2);
+    opacity: 0.95;
+    filter: brightness(1.15);
+  }
+  60% {
+    transform: scaleX(1.02) scaleY(1.05);
+    opacity: 1;
+    filter: brightness(1.08);
+  }
+  100% {
+    transform: scaleX(1) scaleY(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+/* ===== STAGGERED ANIMATIONS ===== */
+
+/* Staggered animation for multiple items updating simultaneously */
+.animate-stagger-update {
+  animation: staggerUpdate 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.animate-stagger-update:nth-child(1) { animation-delay: 0ms; }
+.animate-stagger-update:nth-child(2) { animation-delay: 100ms; }
+.animate-stagger-update:nth-child(3) { animation-delay: 200ms; }
+.animate-stagger-update:nth-child(4) { animation-delay: 300ms; }
+.animate-stagger-update:nth-child(5) { animation-delay: 400ms; }
+
+@keyframes staggerUpdate {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+/* GPU acceleration for smooth animations */
+.animate-price-flash-up,
+.animate-price-flash-down,
+.animate-volume-spike,
+.animate-market-cap-change,
+.animate-data-refresh,
+.animate-volume-bar,
+.animate-volume-bar-significant {
+  will-change: transform, opacity, background-color, box-shadow;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Remove will-change after animations complete */
+.animate-price-flash-up:not(.animating),
+.animate-price-flash-down:not(.animating),
+.animate-volume-spike:not(.animating),
+.animate-market-cap-change:not(.animating) {
+  will-change: auto;
+}
+
+/* ===== ACCESSIBILITY SUPPORT ===== */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-price-flash-up,
+  .animate-price-flash-down,
+  .animate-volume-spike,
+  .animate-market-cap-change,
+  .animate-data-refresh,
+  .animate-volume-bar,
+  .animate-volume-bar-significant,
+  .animate-live-pulse,
+  .animate-stagger-update {
+    animation: none !important;
+  }
+  
+  .animate-data-refresh::before {
+    display: none;
+  }
+  
+  /* Still provide visual feedback through color changes */
+  .animate-price-flash-up {
+    background-color: rgba(34, 197, 94, 0.1) !important;
+    border-left: 3px solid #22c55e !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .animate-price-flash-down {
+    background-color: rgba(239, 68, 68, 0.1) !important;
+    border-left: 3px solid #ef4444 !important;
+    transition: all 0.3s ease !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .animate-price-flash-up {
+    border: 2px solid #006600 !important;
+    background-color: transparent !important;
+  }
+  
+  .animate-price-flash-down {
+    border: 2px solid #cc0000 !important;
+    background-color: transparent !important;
+  }
+  
+  .movement-indicator-up {
+    background: #006600 !important;
+    box-shadow: none !important;
+  }
+  
+  .movement-indicator-down {
+    background: #cc0000 !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Animation control utilities */
+.animate-significant-movement {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-significant-movement.is-animating {
+  z-index: 10;
+}
+
+/* Movement type indicators */
+.movement-type-price::after {
+  content: '💰';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.movement-type-volume::after {
+  content: '📊';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.movement-type-marketcap::after {
+  content: '📈';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* Animation intensity modifiers */
+.animate-intensity-subtle {
+  animation-duration: 1s !important;
+}
+
+.animate-intensity-normal {
+  animation-duration: 2s !important;
+}
+
+.animate-intensity-strong {
+  animation-duration: 3s !important;
+}

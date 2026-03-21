@@ -1,0 +1,83 @@
+/* Base Layout Styles */
+
+/* Trading Platform Layout */
+.base-trading-platform {
+  @apply min-h-screen bg-neutral-50;
+}
+
+.base-navigation {
+  @apply sticky top-0 z-30 bg-white border-b border-neutral-200;
+}
+
+.base-dashboard-layout {
+  @apply flex-1;
+}
+
+/* Grid Layout System */
+.base-grid {
+  @apply grid gap-6;
+}
+
+.base-grid--desktop {
+  @apply grid-cols-12 h-[calc(100vh-5rem)];
+}
+
+.base-grid--tablet {
+  @apply grid-cols-1 gap-6;
+}
+
+.base-grid--mobile {
+  @apply grid-cols-1 gap-4;
+}
+
+/* Column Layouts */
+.base-column {
+  @apply flex flex-col;
+}
+
+.base-column--portfolio {
+  @apply col-span-3 bg-white border-r border-neutral-200;
+}
+
+.base-column--market {
+  @apply col-span-6 bg-neutral-50;
+}
+
+.base-column--trading {
+  @apply col-span-3 bg-white border-l border-neutral-200;
+}
+
+/* Section Layouts */
+.base-section {
+  @apply p-6;
+}
+
+.base-section--header {
+  @apply flex items-center justify-between mb-6;
+}
+
+.base-section--content {
+  @apply flex-1 overflow-y-auto;
+}
+
+/* Responsive Layout Utilities */
+@media (max-width: 1199px) {
+  .base-column--portfolio,
+  .base-column--trading {
+    @apply border-0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .base-grid--tablet-main {
+    @apply grid-cols-5 gap-6;
+  }
+  
+  .base-column--market-tablet {
+    @apply col-span-3;
+  }
+  
+  .base-column--trading-tablet {
+    @apply col-span-2;
+  }
+}

@@ -1,0 +1,631 @@
+/**
+ * Browser Compatibility Fixes
+ * 
+ * This file contains vendor prefixes and browser-specific fixes
+ * to ensure compatibility across Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+ * 
+ * Note: Most vendor prefixes are automatically added by autoprefixer during build.
+ * This file contains manual fixes for edge cases and browser-specific issues.
+ */
+
+/* ===== SAFARI-SPECIFIC FIXES ===== */
+
+/* Backdrop Filter - Safari requires -webkit- prefix */
+.glass-card,
+.glass-card--portfolio,
+.glass-card--market,
+.glass-card--trading,
+.glass-card--chart,
+.glass-card--modal,
+.blur-glass-subtle,
+.blur-glass-light,
+.blur-glass-medium,
+.blur-glass-strong,
+.blur-glass-intense {
+  -webkit-backdrop-filter: inherit;
+  backdrop-filter: inherit;
+}
+
+/* iOS Safari - Prevent zoom on input focus */
+@media (max-width: 767px) {
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important; /* Prevents iOS zoom */
+  }
+}
+
+/* iOS Safari - Momentum scrolling */
+.swipeable,
+.custom-scrollbar,
+.mobile-layout,
+.overflow-auto,
+.overflow-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* iOS Safari - Tap highlight color */
+button,
+a,
+.interactive,
+.btn-primary,
+.btn-secondary,
+.card-interactive,
+.mobile-tab-button,
+.touch-manipulation {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS Safari - User select */
+.no-select,
+.interactive,
+button {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* iOS Safari - Touch callout (long press menu) */
+.no-select,
+.interactive,
+button,
+img {
+  -webkit-touch-callout: none;
+}
+
+/* Safari - Appearance reset for form elements */
+input[type="search"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+/* Safari - Fix for flexbox min-height bug */
+.flex-container {
+  min-height: 0;
+  min-width: 0;
+}
+
+/* ===== FIREFOX-SPECIFIC FIXES ===== */
+
+/* Firefox - Scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
+/* Firefox - Focus outline */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* Firefox - Number input spinner */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ===== WEBKIT (CHROME, SAFARI, EDGE) FIXES ===== */
+
+/* Webkit - Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Webkit - Number input spinner */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Webkit - Search input clear button */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/* Webkit - Autofill styling */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: inherit !important;
+}
+
+/* ===== EDGE-SPECIFIC FIXES ===== */
+
+/* Edge - Clear button on inputs */
+input::-ms-clear,
+input::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Edge - Remove default X button from search inputs */
+input[type="search"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* ===== CROSS-BROWSER FIXES ===== */
+
+/* Box-sizing reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Smooth scrolling with fallback */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Font smoothing */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Transform GPU acceleration */
+.layout-transition,
+.smooth-transform,
+.professional-card,
+.glass-card,
+.collapsible-content {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  -ms-perspective: 1000px;
+  perspective: 1000px;
+}
+
+/* Will-change optimization */
+.animating,
+.transitioning {
+  will-change: transform, opacity;
+}
+
+.animation-complete {
+  will-change: auto;
+}
+
+/* ===== HIGH CONTRAST MODE FIXES ===== */
+
+/* Windows High Contrast Mode */
+@media (prefers-contrast: high) {
+  /* Remove backdrop filters in high contrast */
+  .glass-card,
+  .glass-card--portfolio,
+  .glass-card--market,
+  .glass-card--trading,
+  .glass-card--chart,
+  .glass-card--modal {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid #000000 !important;
+  }
+  
+  /* Enhance focus indicators */
+  *:focus,
+  *:focus-visible {
+    outline: 3px solid #000000 !important;
+    outline-offset: 2px !important;
+  }
+  
+  /* Remove shadows */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
+
+/* ===== REDUCED MOTION FIXES ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all animations */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Remove transforms */
+  .hover-lift:hover,
+  .hover-lift-subtle:hover,
+  .hover-scale:hover,
+  .professional-card:hover,
+  .card-interactive:hover {
+    transform: none !important;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  /* Remove interactive elements */
+  button,
+  .btn-primary,
+  .btn-secondary,
+  nav,
+  .mobile-bottom-nav,
+  .mobile-fab,
+  .no-print {
+    display: none !important;
+  }
+  
+  /* Optimize for print */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  /* Remove shadows and effects */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  /* Add borders for structure */
+  .card,
+  .glass-card {
+    border: 1px solid black !important;
+    page-break-inside: avoid;
+  }
+  
+  /* Ensure links are visible */
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+}
+
+/* ===== MOBILE PERFORMANCE OPTIMIZATIONS ===== */
+
+@media (max-width: 767px) {
+  /* Reduce backdrop blur for performance */
+  .glass-card,
+  .glass-card--portfolio,
+  .glass-card--market,
+  .glass-card--trading {
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+  
+  /* Simplify shadows */
+  .shadow-lg,
+  .shadow-xl,
+  .shadow-2xl,
+  .shadow-professional-lg {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Reduce animation complexity */
+  * {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.2s !important;
+  }
+  
+  /* Disable hover effects on touch devices */
+  .hover-lift:hover,
+  .hover-lift-subtle:hover,
+  .hover-scale:hover {
+    transform: none !important;
+  }
+}
+
+/* ===== SAFE AREA INSETS (iPhone X+) ===== */
+
+@supports (padding: env(safe-area-inset-top)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  .fixed-header,
+  nav {
+    padding-top: max(16px, env(safe-area-inset-top));
+  }
+  
+  .fixed-footer,
+  .mobile-bottom-nav {
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+
+/* ===== FEATURE DETECTION FALLBACKS ===== */
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(10px)) {
+  .glass-card,
+  .glass-card--portfolio,
+  .glass-card--market,
+  .glass-card--trading,
+  .glass-card--chart,
+  .glass-card--modal {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* Fallback for browsers without CSS Grid support */
+@supports not (display: grid) {
+  .desktop-layout,
+  .grid-responsive {
+    display: flex !important;
+    flex-wrap: wrap !important;
+  }
+  
+  .desktop-portfolio,
+  .desktop-market,
+  .desktop-trading {
+    flex: 1 1 300px !important;
+  }
+}
+
+/* Fallback for browsers without clamp() support */
+@supports not (font-size: clamp(1rem, 2vw, 2rem)) {
+  :root {
+    font-size: 16px !important;
+  }
+  
+  h1 { font-size: 48px !important; }
+  h2 { font-size: 36px !important; }
+  h3 { font-size: 30px !important; }
+  h4 { font-size: 24px !important; }
+  h5 { font-size: 20px !important; }
+  h6 { font-size: 18px !important; }
+}
+
+/* Fallback for browsers without CSS custom properties */
+@supports not (--custom: property) {
+  /* Fallback values for critical custom properties */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .btn-primary {
+    background: #3b82f6 !important;
+    color: white !important;
+  }
+  
+  .text-market-positive {
+    color: #15803d !important;
+  }
+  
+  .text-market-negative {
+    color: #b91c1c !important;
+  }
+}
+
+/* ===== BROWSER-SPECIFIC HACKS (Use sparingly) ===== */
+
+/* Safari 14+ specific */
+@supports (-webkit-backdrop-filter: blur(1px)) and (not (backdrop-filter: blur(1px))) {
+  /* Safari-only styles if needed */
+}
+
+/* Firefox-only */
+@-moz-document url-prefix() {
+  /* Firefox-only styles if needed */
+}
+
+/* Edge-only (legacy) */
+@supports (-ms-ime-align: auto) {
+  /* Edge-only styles if needed */
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+
+/* Focus-visible polyfill support */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+.js-focus-visible .focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Ensure focus indicators are always visible */
+*:focus-visible {
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+}
+
+/* Skip to content link */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #3b82f6;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  z-index: 10000;
+  transition: top 0.2s ease;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* ===== PERFORMANCE HINTS ===== */
+
+/* Contain layout for better performance */
+.card,
+.glass-card,
+.professional-card {
+  contain: layout style paint;
+}
+
+/* Content visibility for off-screen content */
+.lazy-content {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* ===== DARK MODE SUPPORT ===== */
+
+@media (prefers-color-scheme: dark) {
+  /* Dark mode adjustments for glass morphism */
+  .glass-card {
+    background: rgba(30, 41, 59, 0.85) !important;
+    border-color: rgba(71, 85, 105, 0.2) !important;
+  }
+  
+  /* Adjust scrollbar for dark mode */
+  ::-webkit-scrollbar-track {
+    background: #1e293b;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #475569;
+  }
+  
+  * {
+    scrollbar-color: #475569 #1e293b;
+  }
+}
+
+/* ===== ORIENTATION CHANGES ===== */
+
+@media (orientation: landscape) and (max-width: 767px) {
+  /* Landscape mobile optimizations */
+  .mobile-layout {
+    padding: 8px;
+  }
+  
+  .card,
+  .glass-card {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+  
+  nav {
+    height: 48px;
+  }
+}
+
+/* ===== TOUCH DEVICE DETECTION ===== */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch device specific styles */
+  button,
+  a,
+  .interactive {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Disable hover effects on touch devices */
+  .hover-lift:hover,
+  .hover-scale:hover,
+  .card-interactive:hover {
+    transform: none !important;
+  }
+}
+
+/* ===== POINTER DEVICE DETECTION ===== */
+
+@media (hover: hover) and (pointer: fine) {
+  /* Mouse/trackpad specific styles */
+  .interactive:hover {
+    cursor: pointer;
+  }
+}
+
+/* ===== BROWSER UPDATE NOTICE ===== */
+
+/* Show notice for unsupported browsers */
+.browser-update-notice {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fef2f2;
+  border-bottom: 2px solid #ef4444;
+  padding: 16px;
+  text-align: center;
+  z-index: 10000;
+}
+
+/* Show notice in old browsers (detected via JavaScript) */
+.outdated-browser .browser-update-notice {
+  display: block;
+}
+
+/* ===== END OF COMPATIBILITY FIXES ===== */

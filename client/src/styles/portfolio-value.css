@@ -1,0 +1,512 @@
+/* Portfolio Value Component Styles */
+/* Implements Requirements 1.1: Portfolio value as the largest, most prominent element */
+
+.portfolio-value-container {
+  width: 100%;
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+/* Main Portfolio Value Display - Largest Element on Interface */
+.portfolio-value-display {
+  transition: all var(--animation-normal) var(--ease-professional);
+  position: relative;
+  margin-bottom: var(--spacing-md);
+  
+  /* GPU acceleration for smooth animations */
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.portfolio-value-display h1 {
+  /* Ensure this is the largest text on the interface */
+  font-size: var(--font-size-display-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-display-2xl);
+  letter-spacing: var(--letter-spacing-tighter);
+  font-feature-settings: var(--font-feature-tabular);
+  color: var(--color-neutral-900);
+  
+  /* Add subtle text shadow for prominence */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  
+  /* Smooth transitions for color changes */
+  transition: color var(--animation-value-change) var(--ease-professional);
+}
+
+/* Enhanced Value Change Animations with Improved Visual Feedback */
+.portfolio-value-display.animate-value-increase {
+  animation: portfolioValueIncrease var(--animation-value-change) var(--ease-professional);
+}
+
+.portfolio-value-display.animate-value-decrease {
+  animation: portfolioValueDecrease var(--animation-value-change) var(--ease-professional);
+}
+
+/* Strong animation variants for significant changes */
+.portfolio-value-display.animate-strong {
+  animation-duration: calc(var(--animation-value-change) * 1.2);
+}
+
+/* Subtle update animation for small changes */
+.portfolio-value-display.animate-subtle-update {
+  animation: subtleUpdate 300ms var(--ease-professional);
+}
+
+@keyframes subtleUpdate {
+  0% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.01);
+    opacity: 0.95;
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Enhanced keyframes with smoother transitions */
+@keyframes portfolioValueIncrease {
+  0% { 
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  15% { 
+    transform: scale(1.02);
+    filter: brightness(1.05);
+  }
+  30% { 
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
+    filter: brightness(1.1);
+  }
+  50% { 
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+    filter: brightness(1.05);
+  }
+  75% { 
+    transform: scale(1.01);
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+    filter: brightness(1.02);
+  }
+  100% { 
+    transform: scale(1);
+    box-shadow: none;
+    filter: brightness(1);
+  }
+}
+
+@keyframes portfolioValueDecrease {
+  0% { 
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  15% { 
+    transform: scale(1.02);
+    filter: brightness(1.05);
+  }
+  30% { 
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
+    filter: brightness(1.1);
+  }
+  50% { 
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+    filter: brightness(1.05);
+  }
+  75% { 
+    transform: scale(1.01);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+    filter: brightness(1.02);
+  }
+  100% { 
+    transform: scale(1);
+    box-shadow: none;
+    filter: brightness(1);
+  }
+}
+
+/* Enhanced color flash effects during animation with smoother transitions */
+.portfolio-value-display.animate-value-increase h1 {
+  animation: colorFlashIncrease var(--animation-value-change) var(--ease-professional);
+}
+
+.portfolio-value-display.animate-value-decrease h1 {
+  animation: colorFlashDecrease var(--animation-value-change) var(--ease-professional);
+}
+
+/* Additional animation states for enhanced visual feedback */
+.portfolio-value-display.scale-active {
+  transform: scale(1.02);
+  transition: transform 200ms var(--ease-professional);
+}
+
+.portfolio-value-display.color-flash h1 {
+  transition: color 300ms var(--ease-professional);
+}
+
+/* Enhanced percentage change animation */
+.animate-percentage-change {
+  animation: percentageChangeHighlight 600ms var(--ease-professional);
+}
+
+@keyframes percentageChangeHighlight {
+  0% { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+  25% { 
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+  50% { 
+    transform: translateY(-1px);
+    opacity: 0.95;
+  }
+  100% { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Subtle bounce animation for trend icons */
+.animate-bounce-subtle {
+  animation: bounceSubtle 600ms var(--ease-professional);
+}
+
+@keyframes bounceSubtle {
+  0%, 100% { 
+    transform: translateY(0) scale(1);
+  }
+  25% { 
+    transform: translateY(-2px) scale(1.1);
+  }
+  50% { 
+    transform: translateY(-1px) scale(1.05);
+  }
+  75% { 
+    transform: translateY(-0.5px) scale(1.02);
+  }
+}
+
+/* Enhanced color flash keyframes with smoother transitions */
+@keyframes colorFlashIncrease {
+  0% { color: var(--color-neutral-900); }
+  20% { color: #16a34a; }
+  40% { color: #22c55e; }
+  60% { color: #16a34a; }
+  80% { color: #15803d; }
+  100% { color: var(--color-neutral-900); }
+}
+
+@keyframes colorFlashDecrease {
+  0% { color: var(--color-neutral-900); }
+  20% { color: #dc2626; }
+  40% { color: #ef4444; }
+  60% { color: #dc2626; }
+  80% { color: #b91c1c; }
+  100% { color: var(--color-neutral-900); }
+}
+
+/* Enhanced hover effect for better interactivity */
+.portfolio-value-display:hover {
+  transform: scale(1.02);
+  transition: transform var(--animation-normal) var(--ease-professional);
+}
+
+.portfolio-value-display:hover h1 {
+  color: var(--color-brand-primary-700);
+  transition: color var(--animation-normal) var(--ease-professional);
+}
+
+/* Enhanced animating state with better performance optimization */
+.portfolio-value-display.animating {
+  /* Ensure smooth rendering during animation with GPU acceleration */
+  transform: translateZ(0);
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Performance optimization - remove will-change after animations complete */
+.portfolio-value-display:not(.animating):not(:hover):not(:focus) {
+  will-change: auto;
+}
+
+/* Responsive Typography Scaling */
+@media (max-width: 767px) {
+  .portfolio-value-container {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+  
+  .portfolio-value-display h1 {
+    /* Scale down for mobile but keep it prominent */
+    font-size: calc(var(--font-size-display-2xl) * var(--scale-mobile));
+    line-height: 1.1;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .portfolio-value-display h1 {
+    /* Tablet scaling */
+    font-size: calc(var(--font-size-display-2xl) * var(--scale-tablet));
+  }
+}
+
+@media (min-width: 1400px) {
+  .portfolio-value-display h1 {
+    /* Large screen enhancement */
+    font-size: calc(var(--font-size-display-2xl) * var(--scale-large));
+  }
+}
+
+/* Animation for value changes */
+.portfolio-value-display.value-changed {
+  animation: valueUpdate 0.6s ease-in-out;
+}
+
+@keyframes valueUpdate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Enhanced accessibility support with improved reduced motion handling */
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-value-display {
+    transition: none;
+  }
+  
+  .portfolio-value-display:hover {
+    transform: none;
+  }
+  
+  .portfolio-value-display.value-changed {
+    animation: none;
+  }
+  
+  /* Disable enhanced value change animations */
+  .portfolio-value-display.animate-value-increase,
+  .portfolio-value-display.animate-value-decrease,
+  .portfolio-value-display.animate-subtle-update {
+    animation: none;
+  }
+  
+  .portfolio-value-display.animate-value-increase h1,
+  .portfolio-value-display.animate-value-decrease h1 {
+    animation: none;
+  }
+  
+  /* Disable percentage and icon animations */
+  .animate-percentage-change,
+  .animate-bounce-subtle {
+    animation: none;
+  }
+  
+  /* Still allow subtle color changes for accessibility feedback */
+  .portfolio-value-display.animate-value-increase h1 {
+    color: #22c55e;
+    transition: color 200ms ease;
+  }
+  
+  .portfolio-value-display.animate-value-decrease h1 {
+    color: #ef4444;
+    transition: color 200ms ease;
+  }
+  
+  /* Maintain scale feedback but without animation */
+  .portfolio-value-display.scale-active {
+    transform: scale(1.01);
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .portfolio-value-display h1 {
+    color: #000000;
+    text-shadow: none;
+    font-weight: var(--font-weight-extrabold);
+  }
+  
+  .portfolio-value-display:hover h1 {
+    color: #000000;
+  }
+}
+
+/* Focus styles for accessibility */
+.portfolio-value-display:focus-within {
+  outline: 2px solid var(--color-brand-primary-500);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* Loading state styles */
+.portfolio-value-container .animate-pulse .h-16 {
+  height: 4rem;
+}
+
+@media (max-width: 767px) {
+  .portfolio-value-container .animate-pulse .h-16 {
+    height: 3rem;
+  }
+}
+
+/* Ensure visual prominence over other elements */
+.portfolio-value-display {
+  z-index: 10;
+  position: relative;
+}
+
+/* Professional fintech styling */
+.portfolio-value-container {
+  background: linear-gradient(135deg, 
+    var(--color-neutral-white) 0%, 
+    var(--color-neutral-50) 100%);
+  border-radius: 16px;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-neutral-200);
+}
+
+/* Subtle animation on mount */
+.portfolio-value-container {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure proper spacing and visual hierarchy */
+.portfolio-value-container p {
+  margin-bottom: var(--spacing-xs);
+}
+
+.portfolio-value-container .flex {
+  margin-top: var(--spacing-sm);
+}
+
+/* Professional color scheme integration */
+.portfolio-value-container {
+  --local-bg-primary: var(--color-neutral-white);
+  --local-bg-secondary: var(--color-neutral-50);
+  --local-text-primary: var(--color-neutral-900);
+  --local-text-secondary: var(--color-neutral-600);
+  --local-border: var(--color-neutral-200);
+}
+
+/* ===== ENHANCED PERCENTAGE CHANGE COLOR CODING - Requirements 1.4 ===== */
+/* Professional fintech color conventions with specific hex values */
+
+/* Positive percentage changes (gains) - Green #10b981 */
+.text-percentage-positive {
+  color: #10b981 !important;
+}
+
+/* Negative percentage changes (losses) - Red #ef4444 */
+.text-percentage-negative {
+  color: #ef4444 !important;
+}
+
+/* Neutral percentage changes (zero change) - Gray */
+.text-percentage-neutral {
+  color: #64748b !important; /* neutral-500 */
+}
+
+/* Enhanced hover states for percentage indicators */
+.text-percentage-positive:hover {
+  color: #059669 !important; /* Slightly darker green on hover */
+}
+
+.text-percentage-negative:hover {
+  color: #dc2626 !important; /* Slightly darker red on hover */
+}
+
+.text-percentage-neutral:hover {
+  color: #475569 !important; /* Slightly darker gray on hover */
+}
+
+/* Accessibility: High contrast mode support for percentage colors */
+@media (prefers-contrast: high) {
+  .text-percentage-positive {
+    color: #006600 !important;
+    font-weight: 700;
+  }
+  
+  .text-percentage-negative {
+    color: #cc0000 !important;
+    font-weight: 700;
+  }
+  
+  .text-percentage-neutral {
+    color: #000000 !important;
+    font-weight: 700;
+  }
+}
+
+/* Enhanced animation support for color-coded indicators */
+.animate-percentage-change .text-percentage-positive {
+  animation: percentagePositiveHighlight 600ms var(--ease-professional);
+}
+
+.animate-percentage-change .text-percentage-negative {
+  animation: percentageNegativeHighlight 600ms var(--ease-professional);
+}
+
+@keyframes percentagePositiveHighlight {
+  0% { 
+    color: #10b981;
+    transform: scale(1);
+  }
+  25% { 
+    color: #059669;
+    transform: scale(1.05);
+  }
+  50% { 
+    color: #047857;
+    transform: scale(1.02);
+  }
+  100% { 
+    color: #10b981;
+    transform: scale(1);
+  }
+}
+
+@keyframes percentageNegativeHighlight {
+  0% { 
+    color: #ef4444;
+    transform: scale(1);
+  }
+  25% { 
+    color: #dc2626;
+    transform: scale(1.05);
+  }
+  50% { 
+    color: #b91c1c;
+    transform: scale(1.02);
+  }
+  100% { 
+    color: #ef4444;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,438 @@
+/* Professional Glass Morphism Card System */
+/* Implements consistent glass morphism styling for fintech trading platform */
+/* Requirements: 7.5 - Visual consistency across all components and sections */
+
+/* 
+ * This comprehensive glass morphism system provides:
+ * - Professional glass morphism effects optimized for financial data
+ * - Consistent visual properties (backdrop blur, transparency, borders)
+ * - Multiple variants for different use cases
+ * - CSS custom properties for maintainability
+ * - Integration with existing design system
+ * - Accessibility-compliant contrast and readability
+ * - Responsive glass effects for different screen sizes
+ */
+
+:root {
+  /* ===== GLASS MORPHISM CORE PROPERTIES ===== */
+  
+  /* Backdrop Blur Levels */
+  --glass-blur-subtle: 4px;
+  --glass-blur-light: 8px;
+  --glass-blur-medium: 12px;
+  --glass-blur-strong: 16px;
+  --glass-blur-intense: 20px;
+
+  /* Glass Transparency Levels */
+  --glass-opacity-subtle: 0.95;
+  --glass-opacity-light: 0.85;
+  --glass-opacity-medium: 0.75;
+  --glass-opacity-strong: 0.65;
+  --glass-opacity-intense: 0.55;
+
+  /* Glass Border Opacity */
+  --glass-border-opacity-subtle: 0.1;
+  --glass-border-opacity-light: 0.15;
+  --glass-border-opacity-medium: 0.2;
+  --glass-border-opacity-strong: 0.25;
+  --glass-border-opacity-intense: 0.3;
+
+  /* Glass Shadow Levels */
+  --glass-shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+  --glass-shadow-light: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --glass-shadow-medium: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --glass-shadow-strong: 0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --glass-shadow-intense: 0 25px 50px rgba(0, 0, 0, 0.25), 0 12px 24px rgba(0, 0, 0, 0.12);
+
+  /* ===== FINTECH-SPECIFIC GLASS PROPERTIES ===== */
+  
+  /* Portfolio Card Glass Properties */
+  --glass-portfolio-bg: rgba(255, 255, 255, var(--glass-opacity-light));
+  --glass-portfolio-border: rgba(255, 255, 255, var(--glass-border-opacity-medium));
+  --glass-portfolio-blur: var(--glass-blur-medium);
+  --glass-portfolio-shadow: var(--glass-shadow-medium);
+
+  /* Market Data Card Glass Properties */
+  --glass-market-bg: rgba(248, 250, 252, var(--glass-opacity-medium));
+  --glass-market-border: rgba(226, 232, 240, var(--glass-border-opacity-light));
+  --glass-market-blur: var(--glass-blur-light);
+  --glass-market-shadow: var(--glass-shadow-light);
+
+  /* Trading Panel Glass Properties */
+  --glass-trading-bg: rgba(255, 255, 255, var(--glass-opacity-strong));
+  --glass-trading-border: rgba(59, 130, 246, var(--glass-border-opacity-medium));
+  --glass-trading-blur: var(--glass-blur-strong);
+  --glass-trading-shadow: var(--glass-shadow-strong);
+
+  /* Chart Container Glass Properties */
+  --glass-chart-bg: rgba(255, 255, 255, var(--glass-opacity-subtle));
+  --glass-chart-border: rgba(226, 232, 240, var(--glass-border-opacity-subtle));
+  --glass-chart-blur: var(--glass-blur-subtle);
+  --glass-chart-shadow: var(--glass-shadow-subtle);
+
+  /* Modal Glass Properties */
+  --glass-modal-bg: rgba(255, 255, 255, var(--glass-opacity-medium));
+  --glass-modal-border: rgba(255, 255, 255, var(--glass-border-opacity-strong));
+  --glass-modal-blur: var(--glass-blur-intense);
+  --glass-modal-shadow: var(--glass-shadow-intense);
+
+  /* ===== GLASS MORPHISM HOVER STATES ===== */
+  
+  /* Hover Enhancement Factors */
+  --glass-hover-opacity-increase: 0.05;
+  --glass-hover-border-increase: 0.05;
+  --glass-hover-blur-increase: 2px;
+  --glass-hover-scale: 1.02;
+  --glass-hover-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ===== RESPONSIVE GLASS ADJUSTMENTS ===== */
+  
+  /* Mobile Glass Adjustments (reduce effects for performance) */
+  --glass-mobile-blur-reduction: 0.5;
+  --glass-mobile-opacity-increase: 0.1;
+  
+  /* Desktop Glass Enhancements */
+  --glass-desktop-blur-enhancement: 1.2;
+  --glass-desktop-shadow-enhancement: 1.1;
+}
+
+/* ===== DARK MODE GLASS ADJUSTMENTS ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode Glass Backgrounds */
+    --glass-portfolio-bg: rgba(30, 41, 59, var(--glass-opacity-light));
+    --glass-portfolio-border: rgba(71, 85, 105, var(--glass-border-opacity-medium));
+    
+    --glass-market-bg: rgba(15, 23, 42, var(--glass-opacity-medium));
+    --glass-market-border: rgba(51, 65, 85, var(--glass-border-opacity-light));
+    
+    --glass-trading-bg: rgba(30, 41, 59, var(--glass-opacity-strong));
+    --glass-trading-border: rgba(59, 130, 246, var(--glass-border-opacity-strong));
+    
+    --glass-chart-bg: rgba(15, 23, 42, var(--glass-opacity-subtle));
+    --glass-chart-border: rgba(51, 65, 85, var(--glass-border-opacity-subtle));
+    
+    --glass-modal-bg: rgba(30, 41, 59, var(--glass-opacity-medium));
+    --glass-modal-border: rgba(71, 85, 105, var(--glass-border-opacity-strong));
+  }
+}
+
+/* ===== BASE GLASS MORPHISM CLASSES ===== */
+
+/* Core Glass Card Base */
+.glass-card {
+  position: relative;
+  backdrop-filter: blur(var(--glass-blur-medium));
+  -webkit-backdrop-filter: blur(var(--glass-blur-medium));
+  background: var(--glass-portfolio-bg);
+  border: 1px solid var(--glass-portfolio-border);
+  border-radius: 16px;
+  box-shadow: var(--glass-portfolio-shadow);
+  transition: var(--glass-hover-transition);
+  overflow: hidden;
+}
+
+/* Glass Card Hover Effects */
+.glass-card:hover {
+  transform: translateY(-2px) scale(var(--glass-hover-scale));
+  box-shadow: var(--glass-shadow-strong);
+  background: rgba(255, 255, 255, calc(var(--glass-opacity-light) + var(--glass-hover-opacity-increase)));
+  border-color: rgba(255, 255, 255, calc(var(--glass-border-opacity-medium) + var(--glass-hover-border-increase)));
+}
+
+/* Glass Card Focus States (for accessibility) */
+.glass-card:focus-within {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ===== GLASS MORPHISM VARIANTS ===== */
+
+/* Portfolio Glass Cards */
+.glass-card--portfolio {
+  background: var(--glass-portfolio-bg);
+  border-color: var(--glass-portfolio-border);
+  backdrop-filter: blur(var(--glass-portfolio-blur));
+  -webkit-backdrop-filter: blur(var(--glass-portfolio-blur));
+  box-shadow: var(--glass-portfolio-shadow);
+}
+
+.glass-card--portfolio:hover {
+  background: rgba(255, 255, 255, calc(var(--glass-opacity-light) + var(--glass-hover-opacity-increase)));
+  border-color: rgba(255, 255, 255, calc(var(--glass-border-opacity-medium) + var(--glass-hover-border-increase)));
+  box-shadow: var(--glass-shadow-strong);
+}
+
+/* Market Data Glass Cards */
+.glass-card--market {
+  background: var(--glass-market-bg);
+  border-color: var(--glass-market-border);
+  backdrop-filter: blur(var(--glass-market-blur));
+  -webkit-backdrop-filter: blur(var(--glass-market-blur));
+  box-shadow: var(--glass-market-shadow);
+}
+
+.glass-card--market:hover {
+  background: rgba(248, 250, 252, calc(var(--glass-opacity-medium) + var(--glass-hover-opacity-increase)));
+  border-color: rgba(226, 232, 240, calc(var(--glass-border-opacity-light) + var(--glass-hover-border-increase)));
+  box-shadow: var(--glass-shadow-medium);
+}
+
+/* Trading Panel Glass Cards */
+.glass-card--trading {
+  background: var(--glass-trading-bg);
+  border-color: var(--glass-trading-border);
+  backdrop-filter: blur(var(--glass-trading-blur));
+  -webkit-backdrop-filter: blur(var(--glass-trading-blur));
+  box-shadow: var(--glass-trading-shadow);
+}
+
+.glass-card--trading:hover {
+  background: rgba(255, 255, 255, calc(var(--glass-opacity-strong) + var(--glass-hover-opacity-increase)));
+  border-color: rgba(59, 130, 246, calc(var(--glass-border-opacity-medium) + var(--glass-hover-border-increase)));
+  box-shadow: var(--glass-shadow-intense);
+}
+
+/* Chart Container Glass Cards */
+.glass-card--chart {
+  background: var(--glass-chart-bg);
+  border-color: var(--glass-chart-border);
+  backdrop-filter: blur(var(--glass-chart-blur));
+  -webkit-backdrop-filter: blur(var(--glass-chart-blur));
+  box-shadow: var(--glass-chart-shadow);
+}
+
+.glass-card--chart:hover {
+  background: rgba(255, 255, 255, calc(var(--glass-opacity-subtle) + var(--glass-hover-opacity-increase)));
+  border-color: rgba(226, 232, 240, calc(var(--glass-border-opacity-subtle) + var(--glass-hover-border-increase)));
+  box-shadow: var(--glass-shadow-light);
+}
+
+/* Modal Glass Cards */
+.glass-card--modal {
+  background: var(--glass-modal-bg);
+  border-color: var(--glass-modal-border);
+  backdrop-filter: blur(var(--glass-modal-blur));
+  -webkit-backdrop-filter: blur(var(--glass-modal-blur));
+  box-shadow: var(--glass-modal-shadow);
+}
+
+/* ===== GLASS MORPHISM SIZE VARIANTS ===== */
+
+/* Small Glass Cards */
+.glass-card--sm {
+  padding: var(--spacing-4);
+  border-radius: 12px;
+  backdrop-filter: blur(var(--glass-blur-light));
+  -webkit-backdrop-filter: blur(var(--glass-blur-light));
+}
+
+/* Medium Glass Cards (Default) */
+.glass-card--md {
+  padding: var(--spacing-6);
+  border-radius: 16px;
+}
+
+/* Large Glass Cards */
+.glass-card--lg {
+  padding: var(--spacing-8);
+  border-radius: 20px;
+  backdrop-filter: blur(var(--glass-blur-strong));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+}
+
+/* Extra Large Glass Cards */
+.glass-card--xl {
+  padding: var(--spacing-12);
+  border-radius: 24px;
+  backdrop-filter: blur(var(--glass-blur-intense));
+  -webkit-backdrop-filter: blur(var(--glass-blur-intense));
+}
+
+/* ===== GLASS MORPHISM INTERACTIVE STATES ===== */
+
+/* Clickable Glass Cards */
+.glass-card--interactive {
+  cursor: pointer;
+  transition: var(--glass-hover-transition);
+}
+
+.glass-card--interactive:hover {
+  transform: translateY(-4px) scale(1.03);
+}
+
+.glass-card--interactive:active {
+  transform: translateY(-1px) scale(1.01);
+  transition: all 0.1s ease-out;
+}
+
+/* Disabled Glass Cards */
+.glass-card--disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Selected Glass Cards */
+.glass-card--selected {
+  border-color: var(--color-brand-primary-500);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2), var(--glass-shadow-medium);
+}
+
+/* ===== GLASS MORPHISM CONTENT STYLING ===== */
+
+/* Glass Card Headers */
+.glass-card__header {
+  padding: var(--spacing-4) var(--spacing-6);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 16px 16px 0 0;
+  margin: calc(-1 * var(--spacing-6)) calc(-1 * var(--spacing-6)) var(--spacing-4) calc(-1 * var(--spacing-6));
+}
+
+/* Glass Card Body */
+.glass-card__body {
+  position: relative;
+  z-index: 1;
+}
+
+/* Glass Card Footer */
+.glass-card__footer {
+  padding: var(--spacing-4) var(--spacing-6);
+  border-top: 1px solid rgba(226, 232, 240, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 0 0 16px 16px;
+  margin: var(--spacing-4) calc(-1 * var(--spacing-6)) calc(-1 * var(--spacing-6)) calc(-1 * var(--spacing-6));
+}
+
+/* ===== RESPONSIVE GLASS MORPHISM ===== */
+
+/* Mobile Optimizations (reduce blur for performance) */
+@media (max-width: 767px) {
+  .glass-card {
+    backdrop-filter: blur(calc(var(--glass-blur-medium) * var(--glass-mobile-blur-reduction)));
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur-medium) * var(--glass-mobile-blur-reduction)));
+    background: rgba(255, 255, 255, calc(var(--glass-opacity-light) + var(--glass-mobile-opacity-increase)));
+  }
+
+  .glass-card--portfolio {
+    backdrop-filter: blur(calc(var(--glass-portfolio-blur) * var(--glass-mobile-blur-reduction)));
+    -webkit-backdrop-filter: blur(calc(var(--glass-portfolio-blur) * var(--glass-mobile-blur-reduction)));
+  }
+
+  .glass-card--market {
+    backdrop-filter: blur(calc(var(--glass-market-blur) * var(--glass-mobile-blur-reduction)));
+    -webkit-backdrop-filter: blur(calc(var(--glass-market-blur) * var(--glass-mobile-blur-reduction)));
+  }
+
+  .glass-card--trading {
+    backdrop-filter: blur(calc(var(--glass-trading-blur) * var(--glass-mobile-blur-reduction)));
+    -webkit-backdrop-filter: blur(calc(var(--glass-trading-blur) * var(--glass-mobile-blur-reduction)));
+  }
+
+  /* Reduce hover effects on mobile */
+  .glass-card:hover {
+    transform: none;
+  }
+
+  .glass-card--interactive:hover {
+    transform: none;
+  }
+}
+
+/* Tablet Optimizations */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .glass-card {
+    border-radius: 18px;
+  }
+
+  .glass-card--interactive:hover {
+    transform: translateY(-3px) scale(1.025);
+  }
+}
+
+/* Desktop Enhancements */
+@media (min-width: 1200px) {
+  .glass-card {
+    backdrop-filter: blur(calc(var(--glass-blur-medium) * var(--glass-desktop-blur-enhancement)));
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur-medium) * var(--glass-desktop-blur-enhancement)));
+    box-shadow: calc(var(--glass-portfolio-shadow) * var(--glass-desktop-shadow-enhancement));
+  }
+
+  .glass-card--lg {
+    border-radius: 24px;
+  }
+
+  .glass-card--xl {
+    border-radius: 28px;
+  }
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .glass-card,
+  .glass-card--interactive {
+    transition: none;
+  }
+
+  .glass-card:hover,
+  .glass-card--interactive:hover {
+    transform: none;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #000000;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .glass-card--portfolio,
+  .glass-card--market,
+  .glass-card--trading,
+  .glass-card--chart {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #000000;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Glass Background Utilities */
+.bg-glass-subtle { background: rgba(255, 255, 255, var(--glass-opacity-subtle)); }
+.bg-glass-light { background: rgba(255, 255, 255, var(--glass-opacity-light)); }
+.bg-glass-medium { background: rgba(255, 255, 255, var(--glass-opacity-medium)); }
+.bg-glass-strong { background: rgba(255, 255, 255, var(--glass-opacity-strong)); }
+.bg-glass-intense { background: rgba(255, 255, 255, var(--glass-opacity-intense)); }
+
+/* Glass Blur Utilities */
+.blur-glass-subtle { backdrop-filter: blur(var(--glass-blur-subtle)); -webkit-backdrop-filter: blur(var(--glass-blur-subtle)); }
+.blur-glass-light { backdrop-filter: blur(var(--glass-blur-light)); -webkit-backdrop-filter: blur(var(--glass-blur-light)); }
+.blur-glass-medium { backdrop-filter: blur(var(--glass-blur-medium)); -webkit-backdrop-filter: blur(var(--glass-blur-medium)); }
+.blur-glass-strong { backdrop-filter: blur(var(--glass-blur-strong)); -webkit-backdrop-filter: blur(var(--glass-blur-strong)); }
+.blur-glass-intense { backdrop-filter: blur(var(--glass-blur-intense)); -webkit-backdrop-filter: blur(var(--glass-blur-intense)); }
+
+/* Glass Border Utilities */
+.border-glass-subtle { border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity-subtle)); }
+.border-glass-light { border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity-light)); }
+.border-glass-medium { border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity-medium)); }
+.border-glass-strong { border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity-strong)); }
+.border-glass-intense { border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity-intense)); }
+
+/* Glass Shadow Utilities */
+.shadow-glass-subtle { box-shadow: var(--glass-shadow-subtle); }
+.shadow-glass-light { box-shadow: var(--glass-shadow-light); }
+.shadow-glass-medium { box-shadow: var(--glass-shadow-medium); }
+.shadow-glass-strong { box-shadow: var(--glass-shadow-strong); }
+.shadow-glass-intense { box-shadow: var(--glass-shadow-intense); }

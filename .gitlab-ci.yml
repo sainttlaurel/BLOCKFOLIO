@@ -1,0 +1,256 @@
+# GitLab CI/CD Pipeline for CoinNova Trading Platform
+
+variables:
+  NODE_VERSION: "18"
+  DOCKER_DRIVER: overlay2
+
+stages:
+  - validate
+  - test
+  - build
+  - security
+  - deploy
+  - verify
+
+# Cache configuration
+.node_cache: &node_cache
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+      - server/node_modules/
+      - client/node_modules/
+      - client/.npm/
+
+# Base job configuration
+.base_job:
+  image: node:${NODE_VERSION}
+  before_script:
+    - node --version
+    - npm --version
+
+# Validation stage
+validate:config:
+  extends: .base_job
+  stage: validate
+  <<: *node_cache
+  script:
+    - npm ci
+    - cd server && npm ci
+    - cd ../client && npm ci
+    - cd ..
+    - |
+      if [ "$CI_COMMIT_BRANCH" = "main" ]; then
+        export NODE_ENV=production
+      elif [ "$CI_COMMIT_BRANCH" = "staging" ]; then
+        export NODE_ENV=staging
+      else
+        export NODE_ENV=development
+      fi
+    - node -e "require('./server/config/env.config').initializeConfig()"
+  only:
+    - branches
+
+# Test stage
+test:unit:
+  extends: .base_job
+  stage: test
+  <<: *node_cache
+  script:
+    - cd client
+    - CI=true npm test -- --coverage --watchAll=false
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: client/coverage/cobertura-coverage.xml
+    paths:
+      - client/coverage/
+    expire_in: 1 week
+  only:
+    - branches
+
+test:lint:
+  extends: .base_job
+  stage: test
+  <<: *node_cache
+  script:
+    - cd client
+    - npm run lint || true
+  allow_failure: true
+  only:
+    - branches
+
+# Build stage
+build:client:
+  extends: .base_job
+  stage: build
+  <<: *node_cache
+  script:
+    - cd client
+    - |
+      if [ "$CI_COMMIT_BRANCH" = "main" ]; then
+        export NODE_ENV=production
+        export REACT_APP_API_URL=$PRODUCTION_API_URL
+      elif [ "$CI_COMMIT_BRANCH" = "staging" ]; then
+        export NODE_ENV=staging
+        export REACT_APP_API_URL=$STAGING_API_URL
+      else
+        export NODE_ENV=development
+        export REACT_APP_API_URL=$DEVELOPMENT_API_URL
+      fi
+    - npm run build
+  artifacts:
+    paths:
+      - client/build/
+    expire_in: 1 week
+  only:
+    - branches
+
+# Security stage
+security:audit:
+  extends: .base_job
+  stage: security
+  <<: *node_cache
+  script:
+    - npm audit --audit-level=moderate || true
+    - cd server && npm audit --audit-level=moderate || true
+    - cd ../client && npm audit --audit-level=moderate || true
+  allow_failure: true
+  only:
+    - branches
+
+security:snyk:
+  image: snyk/snyk:node
+  stage: security
+  script:
+    - snyk test --severity-threshold=high || true
+  allow_failure: true
+  only:
+    - branches
+  when: manual
+
+# Deploy to development
+deploy:development:
+  extends: .base_job
+  stage: deploy
+  environment:
+    name: development
+    url: $DEVELOPMENT_URL
+  script:
+    - apt-get update && apt-get install -y rsync openssh-client
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H $DEVELOPMENT_HOST >> ~/.ssh/known_hosts
+    - |
+      tar -czf deploy.tar.gz \
+        --exclude=node_modules \
+        --exclude=.git \
+        --exclude=client/node_modules \
+        --exclude=server/node_modules \
+        .
+    - scp deploy.tar.gz ${DEVELOPMENT_USER}@${DEVELOPMENT_HOST}:${DEVELOPMENT_PATH}/
+    - |
+      ssh ${DEVELOPMENT_USER}@${DEVELOPMENT_HOST} << 'EOF'
+        cd ${DEVELOPMENT_PATH}
+        tar -xzf deploy.tar.gz
+        chmod +x scripts/*.sh
+        ./scripts/deploy.sh development
+      EOF
+  only:
+    - develop
+  when: manual
+
+# Deploy to staging
+deploy:staging:
+  extends: .base_job
+  stage: deploy
+  environment:
+    name: staging
+    url: $STAGING_URL
+  script:
+    - apt-get update && apt-get install -y rsync openssh-client
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H $STAGING_HOST >> ~/.ssh/known_hosts
+    - |
+      tar -czf deploy.tar.gz \
+        --exclude=node_modules \
+        --exclude=.git \
+        --exclude=client/node_modules \
+        --exclude=server/node_modules \
+        .
+    - scp deploy.tar.gz ${STAGING_USER}@${STAGING_HOST}:${STAGING_PATH}/
+    - |
+      ssh ${STAGING_USER}@${STAGING_HOST} << 'EOF'
+        cd ${STAGING_PATH}
+        tar -xzf deploy.tar.gz
+        chmod +x scripts/*.sh
+        ./scripts/deploy.sh staging
+      EOF
+  only:
+    - staging
+  when: manual
+
+# Deploy to production
+deploy:production:
+  extends: .base_job
+  stage: deploy
+  environment:
+    name: production
+    url: $PRODUCTION_URL
+  script:
+    - apt-get update && apt-get install -y rsync openssh-client
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H $PRODUCTION_HOST >> ~/.ssh/known_hosts
+    - |
+      tar -czf deploy.tar.gz \
+        --exclude=node_modules \
+        --exclude=.git \
+        --exclude=client/node_modules \
+        --exclude=server/node_modules \
+        .
+    - scp deploy.tar.gz ${PRODUCTION_USER}@${PRODUCTION_HOST}:${PRODUCTION_PATH}/
+    - |
+      ssh ${PRODUCTION_USER}@${PRODUCTION_HOST} << 'EOF'
+        cd ${PRODUCTION_PATH}
+        tar -xzf deploy.tar.gz
+        chmod +x scripts/*.sh
+        ./scripts/deploy.sh production
+      EOF
+  only:
+    - main
+  when: manual
+
+# Verify deployment
+verify:health:
+  extends: .base_job
+  stage: verify
+  script:
+    - |
+      if [ "$CI_COMMIT_BRANCH" = "main" ]; then
+        HEALTH_URL=$PRODUCTION_URL
+      elif [ "$CI_COMMIT_BRANCH" = "staging" ]; then
+        HEALTH_URL=$STAGING_URL
+      else
+        HEALTH_URL=$DEVELOPMENT_URL
+      fi
+    - |
+      for i in {1..10}; do
+        if curl -f -s "${HEALTH_URL}/api/health" > /dev/null; then
+          echo "Health check passed"
+          exit 0
+        fi
+        echo "Waiting for application... ($i/10)"
+        sleep 10
+      done
+      echo "Health check failed"
+      exit 1
+  only:
+    - branches
+  when: on_success

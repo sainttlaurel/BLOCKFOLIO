@@ -1,0 +1,484 @@
+/**
+ * Responsive Typography System
+ * 
+ * Implements fluid font sizing using clamp() for smooth scaling across all screen sizes
+ * Breakpoints: 320px, 375px, 414px, 768px, 1024px, 1440px, 1920px
+ * 
+ * Design Principles:
+ * - Fluid scaling between breakpoints using clamp()
+ * - Maintains readability at all sizes
+ * - Proper text hierarchy on all screen sizes
+ * - Optimized line heights and letter spacing
+ * - Minimum 44x44px touch targets preserved
+ */
+
+/* ===== ROOT FONT SIZE SYSTEM ===== */
+/* Base font size scales from 14px (320px) to 16px (1920px+) */
+:root {
+  /* Fluid base font size: 14px at 320px, 16px at 1920px */
+  font-size: clamp(0.875rem, 0.8125rem + 0.3125vw, 1rem);
+  
+  /* Typography scale variables */
+  --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);      /* 12px - 14px */
+  --font-size-sm: clamp(0.875rem, 0.8125rem + 0.3125vw, 1rem);    /* 14px - 16px */
+  --font-size-base: clamp(1rem, 0.9375rem + 0.3125vw, 1.125rem);  /* 16px - 18px */
+  --font-size-lg: clamp(1.125rem, 1.0625rem + 0.3125vw, 1.25rem); /* 18px - 20px */
+  --font-size-xl: clamp(1.25rem, 1.125rem + 0.625vw, 1.5rem);     /* 20px - 24px */
+  --font-size-2xl: clamp(1.5rem, 1.3125rem + 0.9375vw, 1.875rem); /* 24px - 30px */
+  --font-size-3xl: clamp(1.875rem, 1.625rem + 1.25vw, 2.25rem);   /* 30px - 36px */
+  --font-size-4xl: clamp(2.25rem, 1.875rem + 1.875vw, 3rem);      /* 36px - 48px */
+  --font-size-5xl: clamp(3rem, 2.5rem + 2.5vw, 4rem);             /* 48px - 64px */
+  
+  /* Line height scale */
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+  
+  /* Letter spacing scale */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+}
+
+/* ===== BODY TEXT ===== */
+body {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* ===== HEADING HIERARCHY ===== */
+h1, .h1 {
+  font-size: var(--font-size-5xl);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: 800;
+}
+
+h2, .h2 {
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: 700;
+}
+
+h3, .h3 {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-normal);
+  font-weight: 700;
+}
+
+h4, .h4 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-normal);
+  font-weight: 600;
+}
+
+h5, .h5 {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  font-weight: 600;
+}
+
+h6, .h6 {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  font-weight: 600;
+}
+
+/* ===== TEXT SIZES ===== */
+.text-xs {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
+}
+
+.text-sm {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.text-base {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+}
+
+.text-lg {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-normal);
+}
+
+.text-xl {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-snug);
+}
+
+.text-2xl {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-snug);
+}
+
+.text-3xl {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-tight);
+}
+
+.text-4xl {
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-tight);
+}
+
+.text-5xl {
+  font-size: var(--font-size-5xl);
+  line-height: var(--line-height-tight);
+}
+
+/* ===== PARAGRAPH TEXT ===== */
+p {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: 1em;
+}
+
+.lead {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  font-weight: 400;
+}
+
+/* ===== SMALL TEXT ===== */
+small, .small {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+/* ===== DISPLAY TEXT (Extra Large) ===== */
+.display-1 {
+  font-size: clamp(4rem, 3rem + 5vw, 6rem);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tighter);
+  font-weight: 900;
+}
+
+.display-2 {
+  font-size: clamp(3.5rem, 2.75rem + 3.75vw, 5rem);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tighter);
+  font-weight: 800;
+}
+
+/* ===== RESPONSIVE BREAKPOINT ADJUSTMENTS ===== */
+
+/* Extra Small Devices (320px - 374px) */
+@media (max-width: 374px) {
+  :root {
+    --line-height-relaxed: 1.5;
+  }
+  
+  h1, .h1 { font-size: clamp(1.875rem, 1.75rem + 0.625vw, 2.25rem); }
+  h2, .h2 { font-size: clamp(1.5rem, 1.375rem + 0.625vw, 1.875rem); }
+  h3, .h3 { font-size: clamp(1.25rem, 1.125rem + 0.625vw, 1.5rem); }
+}
+
+/* Small Devices (375px - 413px) */
+@media (min-width: 375px) and (max-width: 413px) {
+  :root {
+    font-size: 15px;
+  }
+}
+
+/* Medium Small Devices (414px - 767px) */
+@media (min-width: 414px) and (max-width: 767px) {
+  :root {
+    font-size: 15.5px;
+  }
+}
+
+/* Tablet Devices (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    font-size: 16px;
+  }
+  
+  h1, .h1 { font-size: clamp(2.5rem, 2.25rem + 1.25vw, 3.5rem); }
+  h2, .h2 { font-size: clamp(2rem, 1.75rem + 1.25vw, 3rem); }
+}
+
+/* Desktop Devices (1024px - 1439px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+/* Large Desktop (1440px - 1919px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+/* Extra Large Desktop (1920px+) */
+@media (min-width: 1920px) {
+  :root {
+    font-size: 18px;
+  }
+  
+  h1, .h1 { font-size: clamp(3.5rem, 3rem + 2.5vw, 5rem); }
+  h2, .h2 { font-size: clamp(3rem, 2.5rem + 2.5vw, 4rem); }
+}
+
+/* ===== BUTTON TEXT SIZING ===== */
+/* Ensures buttons maintain minimum 44x44px touch targets */
+button, .btn {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.btn-sm {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.btn-lg {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-normal);
+}
+
+.btn-xl {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-normal);
+}
+
+/* ===== INPUT TEXT SIZING ===== */
+/* Prevents iOS zoom on focus (minimum 16px) */
+input, select, textarea {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+}
+
+@media (max-width: 767px) {
+  input, select, textarea {
+    font-size: 16px; /* Prevents iOS zoom */
+  }
+}
+
+/* ===== LABEL TEXT ===== */
+label {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  font-weight: 500;
+}
+
+/* ===== NAVIGATION TEXT ===== */
+nav a, nav button {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* ===== TABLE TEXT ===== */
+table {
+  font-size: var(--font-size-sm);
+}
+
+thead th {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+tbody td {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+/* ===== CARD TEXT ===== */
+.card-title {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-snug);
+  font-weight: 600;
+}
+
+.card-subtitle {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: #6b7280;
+}
+
+.card-text {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ===== STAT DISPLAY TEXT ===== */
+.stat-value {
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-tight);
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.stat-change {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-normal);
+  font-weight: 600;
+}
+
+/* ===== PRICE DISPLAY TEXT ===== */
+.price-large {
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-tight);
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.price-medium {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-snug);
+  font-weight: 600;
+}
+
+.price-small {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-normal);
+  font-weight: 600;
+}
+
+/* ===== BADGE TEXT ===== */
+.badge {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wide);
+  font-weight: 600;
+}
+
+/* ===== TOOLTIP TEXT ===== */
+.tooltip {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+/* ===== BREADCRUMB TEXT ===== */
+.breadcrumb {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+/* ===== ALERT TEXT ===== */
+.alert-title {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  font-weight: 600;
+}
+
+.alert-text {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ===== READABILITY OPTIMIZATIONS ===== */
+
+/* Optimal line length for readability */
+.prose {
+  max-width: 65ch;
+}
+
+.prose p {
+  margin-bottom: 1.25em;
+}
+
+/* Prevent text overflow */
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-wrap {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+/* Ensure sufficient contrast for small text */
+.text-xs, .text-sm {
+  font-weight: 500;
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  :root {
+    font-size: 12pt;
+  }
+  
+  h1 { font-size: 24pt; }
+  h2 { font-size: 20pt; }
+  h3 { font-size: 18pt; }
+  h4 { font-size: 16pt; }
+  h5 { font-size: 14pt; }
+  h6 { font-size: 12pt; }
+  
+  body {
+    line-height: 1.5;
+  }
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+.high-contrast {
+  /* Increase font weight for better visibility */
+  body {
+    font-weight: 500;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+  }
+  
+  /* Increase letter spacing for readability */
+  * {
+    letter-spacing: 0.025em;
+  }
+}
+
+/* ===== LANDSCAPE ORIENTATION ===== */
+@media (max-width: 767px) and (orientation: landscape) {
+  :root {
+    /* Slightly reduce font sizes in landscape for more content */
+    --font-size-base: clamp(0.875rem, 0.8125rem + 0.3125vw, 1rem);
+    --font-size-lg: clamp(1rem, 0.9375rem + 0.3125vw, 1.125rem);
+    --font-size-xl: clamp(1.125rem, 1.0625rem + 0.3125vw, 1.25rem);
+  }
+  
+  h1, .h1 { font-size: clamp(1.5rem, 1.375rem + 0.625vw, 2rem); }
+  h2, .h2 { font-size: clamp(1.25rem, 1.125rem + 0.625vw, 1.75rem); }
+  h3, .h3 { font-size: clamp(1.125rem, 1rem + 0.625vw, 1.5rem); }
+}

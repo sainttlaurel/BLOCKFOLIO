@@ -1,0 +1,248 @@
+# GitHub Actions Workflow for Production Build and Deployment
+# 
+# This is an example workflow file. To use it:
+# 1. Create .github/workflows/ directory in your repository root
+# 2. Copy this file to .github/workflows/deploy.yml
+# 3. Configure secrets in GitHub repository settings
+# 4. Adjust deployment steps for your hosting provider
+
+name: Production Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - production
+  pull_request:
+    branches:
+      - main
+      - production
+
+jobs:
+  # Build and test job
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+      
+      - name: Install dependencies
+        working-directory: ./client
+        run: npm ci
+      
+      - name: Run tests
+        working-directory: ./client
+        run: npm test -- --watchAll=false --coverage
+      
+      - name: Build production
+        working-directory: ./client
+        run: npm run build:prod
+        env:
+          NODE_ENV: production
+          GENERATE_SOURCEMAP: true
+          DROP_CONSOLE: true
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          REACT_APP_COINGECKO_API_URL: ${{ secrets.REACT_APP_COINGECKO_API_URL }}
+      
+      - name: Check bundle size
+        working-directory: ./client
+        run: |
+          # Check if build-stats.json exists
+          if [ -f "build/build-stats.json" ]; then
+            # Extract total size and check against limit (1MB = 1048576 bytes)
+            TOTAL_JS=$(jq '.totals.js' build/build-stats.json)
+            TOTAL_CSS=$(jq '.totals.css' build/build-stats.json)
+            TOTAL_SIZE=$((TOTAL_JS + TOTAL_CSS))
+            MAX_SIZE=1048576
+            
+            echo "Total bundle size: $TOTAL_SIZE bytes"
+            
+            if [ $TOTAL_SIZE -gt $MAX_SIZE ]; then
+              echo "❌ Bundle size exceeds limit: $TOTAL_SIZE > $MAX_SIZE"
+              exit 1
+            else
+              echo "✅ Bundle size within limit: $TOTAL_SIZE <= $MAX_SIZE"
+            fi
+          else
+            echo "⚠️  build-stats.json not found, skipping size check"
+          fi
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-${{ matrix.node-version }}
+          path: client/build/
+          retention-days: 7
+      
+      - name: Upload build stats
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-stats-${{ matrix.node-version }}
+          path: |
+            client/build/build-stats.json
+            client/build/deployment-report.txt
+          retention-days: 30
+  
+  # Bundle analysis job (only on main branch)
+  analyze:
+    name: Analyze Bundle
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+      
+      - name: Install dependencies
+        working-directory: ./client
+        run: npm ci
+      
+      - name: Analyze bundle
+        working-directory: ./client
+        run: npm run build:analyze
+        env:
+          NODE_ENV: production
+          ANALYZE_BUNDLE: true
+      
+      - name: Upload bundle report
+        uses: actions/upload-artifact@v3
+        with:
+          name: bundle-analysis
+          path: |
+            client/build/bundle-report.html
+            client/build/bundle-stats.json
+          retention-days: 90
+      
+      - name: Comment PR with bundle size
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const stats = JSON.parse(fs.readFileSync('client/build/build-stats.json', 'utf8'));
+            
+            const formatBytes = (bytes) => {
+              const k = 1024;
+              const sizes = ['Bytes', 'KB', 'MB'];
+              const i = Math.floor(Math.log(bytes) / Math.log(k));
+              return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
+            };
+            
+            const totalJs = stats.totals.js;
+            const totalCss = stats.totals.css;
+            const totalJsGzip = stats.totals.jsGzip;
+            const totalCssGzip = stats.totals.cssGzip;
+            
+            const comment = `## 📊 Bundle Size Report
+            
+            | Type | Original | Gzip | Reduction |
+            |------|----------|------|-----------|
+            | JavaScript | ${formatBytes(totalJs)} | ${formatBytes(totalJsGzip)} | ${((1 - totalJsGzip/totalJs) * 100).toFixed(1)}% |
+            | CSS | ${formatBytes(totalCss)} | ${formatBytes(totalCssGzip)} | ${((1 - totalCssGzip/totalCss) * 100).toFixed(1)}% |
+            | **Total** | **${formatBytes(totalJs + totalCss)}** | **${formatBytes(totalJsGzip + totalCssGzip)}** | **${((1 - (totalJsGzip + totalCssGzip)/(totalJs + totalCss)) * 100).toFixed(1)}%** |
+            
+            ${stats.warnings.length > 0 ? '### ⚠️ Warnings\n' + stats.warnings.map(w => `- ${w}`).join('\n') : '✅ No warnings'}
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+  
+  # Deploy job (only on main branch after successful build)
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build, analyze]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-18.x
+          path: client/build/
+      
+      - name: Run deployment checks
+        working-directory: ./client
+        run: npm run deploy:check
+      
+      # Example: Deploy to Netlify
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --prod --dir=client/build
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      
+      # Example: Deploy to AWS S3
+      # - name: Deploy to S3
+      #   uses: jakejarvis/s3-sync-action@master
+      #   with:
+      #     args: --acl public-read --follow-symlinks --delete
+      #   env:
+      #     AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     AWS_REGION: 'us-east-1'
+      #     SOURCE_DIR: 'client/build'
+      
+      # Example: Deploy to Vercel
+      # - name: Deploy to Vercel
+      #   uses: amondnet/vercel-action@v20
+      #   with:
+      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+      #     working-directory: ./client
+      #     vercel-args: '--prod'
+      
+      - name: Notify deployment success
+        if: success()
+        run: |
+          echo "✅ Deployment successful!"
+          echo "Build stats available in artifacts"
+      
+      - name: Notify deployment failure
+        if: failure()
+        run: |
+          echo "❌ Deployment failed!"
+          echo "Check logs for details"
+
+# Secrets required in GitHub repository settings:
+# - REACT_APP_API_URL: Production API URL
+# - REACT_APP_COINGECKO_API_URL: CoinGecko API URL
+# - NETLIFY_SITE_ID: Netlify site ID (if using Netlify)
+# - NETLIFY_AUTH_TOKEN: Netlify authentication token (if using Netlify)
+# - AWS_S3_BUCKET: S3 bucket name (if using AWS)
+# - AWS_ACCESS_KEY_ID: AWS access key (if using AWS)
+# - AWS_SECRET_ACCESS_KEY: AWS secret key (if using AWS)
+# - VERCEL_TOKEN: Vercel token (if using Vercel)
+# - VERCEL_ORG_ID: Vercel organization ID (if using Vercel)
+# - VERCEL_PROJECT_ID: Vercel project ID (if using Vercel)

@@ -1,0 +1,115 @@
+/* Base Utility Classes */
+
+/* Spacing Utilities */
+.base-spacing--xs {
+  @apply p-2 space-y-2;
+}
+
+.base-spacing--sm {
+  @apply p-4 space-y-4;
+}
+
+.base-spacing--md {
+  @apply p-6 space-y-6;
+}
+
+.base-spacing--lg {
+  @apply p-8 space-y-8;
+}
+
+/* Flex Utilities */
+.base-flex--center {
+  @apply flex items-center justify-center;
+}
+
+.base-flex--between {
+  @apply flex items-center justify-between;
+}
+
+.base-flex--start {
+  @apply flex items-center justify-start;
+}
+
+.base-flex--end {
+  @apply flex items-center justify-end;
+}
+
+.base-flex--col {
+  @apply flex flex-col;
+}
+
+.base-flex--col-center {
+  @apply flex flex-col items-center justify-center;
+}
+
+/* Text Utilities */
+.base-text--primary {
+  @apply text-neutral-900;
+}
+
+.base-text--secondary {
+  @apply text-neutral-600;
+}
+
+.base-text--muted {
+  @apply text-neutral-500;
+}
+
+.base-text--success {
+  @apply text-success-600;
+}
+
+.base-text--error {
+  @apply text-error-600;
+}
+
+.base-text--warning {
+  @apply text-warning-600;
+}
+
+/* Background Utilities */
+.base-bg--primary {
+  @apply bg-white;
+}
+
+.base-bg--secondary {
+  @apply bg-neutral-50;
+}
+
+.base-bg--muted {
+  @apply bg-neutral-100;
+}
+
+/* Border Utilities */
+.base-border {
+  @apply border border-neutral-200;
+}
+
+.base-border--top {
+  @apply border-t border-neutral-200;
+}
+
+.base-border--bottom {
+  @apply border-b border-neutral-200;
+}
+
+.base-border--left {
+  @apply border-l border-neutral-200;
+}
+
+.base-border--right {
+  @apply border-r border-neutral-200;
+}
+
+/* Shadow Utilities */
+.base-shadow--sm {
+  box-shadow: var(--component-shadow-sm);
+}
+
+.base-shadow--md {
+  box-shadow: var(--component-shadow-md);
+}
+
+.base-shadow--lg {
+  box-shadow: var(--component-shadow-lg);
+}

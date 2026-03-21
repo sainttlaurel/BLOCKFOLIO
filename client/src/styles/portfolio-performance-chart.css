@@ -1,0 +1,285 @@
+/* Portfolio Performance Chart Styles */
+/* Responsive chart sizing and mobile optimization */
+
+.portfolio-performance-chart {
+  @apply w-full;
+}
+
+.portfolio-performance-line-chart {
+  @apply w-full h-full;
+}
+
+.portfolio-chart-container {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.portfolio-chart-container:hover {
+  @apply shadow-md;
+}
+
+/* Timeframe Selector Responsive Styles */
+.timeframe-selector {
+  @apply flex-shrink-0;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 767px) {
+  .portfolio-chart-container {
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .portfolio-chart-container .p-6 {
+    @apply p-4;
+  }
+
+  .portfolio-chart-container .grid-cols-1.md\:grid-cols-3 {
+    @apply grid-cols-1 gap-3;
+  }
+
+  .portfolio-chart-container .flex.items-center.justify-between {
+    @apply flex-col items-start space-y-4;
+  }
+
+  .portfolio-chart-container .flex.items-center.justify-between > div:first-child {
+    @apply w-full;
+  }
+
+  .portfolio-chart-container .flex.items-center.justify-between > div:last-child {
+    @apply w-full flex justify-center;
+  }
+
+  /* Mobile Chart Height */
+  .portfolio-performance-chart {
+    min-height: 250px;
+  }
+
+  /* Mobile Timeframe Selector */
+  .timeframe-selector .flex {
+    @apply w-full justify-center;
+  }
+
+  .timeframe-selector button {
+    @apply flex-1 text-center;
+  }
+
+  /* Mobile Performance Summary */
+  .portfolio-chart-container .bg-gray-50.rounded-lg.p-4 {
+    @apply p-3;
+  }
+
+  .portfolio-chart-container .text-lg {
+    @apply text-base;
+  }
+
+  /* Mobile Chart Info */
+  .portfolio-chart-container .bg-blue-50 {
+    @apply p-3;
+  }
+
+  .portfolio-chart-container .bg-blue-50 .text-xs {
+    @apply text-sm;
+  }
+}
+
+/* Tablet Optimizations */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .portfolio-chart-container {
+    @apply mx-4;
+  }
+
+  .portfolio-chart-container .grid-cols-1.md\:grid-cols-3 {
+    @apply grid-cols-2 gap-4;
+  }
+
+  .portfolio-chart-container .grid-cols-1.md\:grid-cols-3 > div:last-child {
+    @apply col-span-2;
+  }
+
+  /* Tablet Chart Height */
+  .portfolio-performance-chart {
+    min-height: 300px;
+  }
+
+  /* Tablet Timeframe Selector */
+  .timeframe-selector {
+    @apply flex-shrink-0;
+  }
+}
+
+/* Desktop Optimizations */
+@media (min-width: 1200px) {
+  .portfolio-chart-container {
+    @apply shadow-sm hover:shadow-lg;
+  }
+
+  /* Desktop Chart Height */
+  .portfolio-performance-chart {
+    min-height: 320px;
+  }
+
+  /* Enhanced hover effects for desktop */
+  .portfolio-chart-container .bg-gray-50:hover {
+    @apply bg-gray-100 transition-colors duration-200;
+  }
+
+  .timeframe-selector button:hover {
+    @apply transform scale-105 transition-transform duration-150;
+  }
+}
+
+/* Chart Loading States */
+.portfolio-chart-loading {
+  @apply flex items-center justify-center;
+  min-height: 320px;
+}
+
+.portfolio-chart-loading .animate-spin {
+  @apply text-blue-600;
+}
+
+/* Chart Animation Classes */
+.chart-fade-in {
+  animation: chartFadeIn 0.75s ease-in-out;
+}
+
+@keyframes chartFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Performance Metrics Animation */
+.performance-metric {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.performance-metric:hover {
+  @apply transform scale-105;
+}
+
+/* Responsive Text Scaling */
+@media (max-width: 480px) {
+  .portfolio-chart-container .text-xl {
+    @apply text-lg;
+  }
+
+  .portfolio-chart-container .text-lg {
+    @apply text-base;
+  }
+
+  .portfolio-chart-container .text-base {
+    @apply text-sm;
+  }
+
+  .portfolio-chart-container .text-sm {
+    @apply text-xs;
+  }
+
+  /* Extra small mobile adjustments */
+  .portfolio-chart-container .p-4 {
+    @apply p-3;
+  }
+
+  .portfolio-chart-container .space-x-3 {
+    @apply space-x-2;
+  }
+
+  .portfolio-chart-container .space-y-4 {
+    @apply space-y-3;
+  }
+
+  .portfolio-performance-chart {
+    min-height: 200px;
+  }
+}
+
+/* High DPI Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .portfolio-performance-line-chart canvas {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Dark Mode Support (if implemented) */
+@media (prefers-color-scheme: dark) {
+  .portfolio-chart-container {
+    @apply bg-gray-800 border-gray-700;
+  }
+
+  .portfolio-chart-container .text-gray-900 {
+    @apply text-gray-100;
+  }
+
+  .portfolio-chart-container .text-gray-600 {
+    @apply text-gray-400;
+  }
+
+  .portfolio-chart-container .bg-gray-50 {
+    @apply bg-gray-700;
+  }
+
+  .portfolio-chart-container .bg-blue-50 {
+    @apply bg-blue-900;
+  }
+
+  .portfolio-chart-container .text-blue-900 {
+    @apply text-blue-100;
+  }
+
+  .portfolio-chart-container .text-blue-700 {
+    @apply text-blue-300;
+  }
+}
+
+/* Accessibility Improvements */
+.portfolio-chart-container button:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+.portfolio-chart-container .timeframe-selector button:focus {
+  @apply ring-1 ring-blue-500 ring-offset-1;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-chart-container,
+  .performance-metric,
+  .timeframe-selector button {
+    @apply transition-none;
+  }
+
+  .chart-fade-in {
+    animation: none;
+  }
+
+  .portfolio-chart-container:hover {
+    @apply transform-none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .portfolio-chart-container {
+    @apply shadow-none border border-gray-300;
+  }
+
+  .portfolio-chart-container .bg-gray-50,
+  .portfolio-chart-container .bg-blue-50 {
+    @apply bg-white border border-gray-200;
+  }
+
+  .timeframe-selector {
+    @apply hidden;
+  }
+
+  .portfolio-performance-chart {
+    min-height: 400px;
+  }
+}

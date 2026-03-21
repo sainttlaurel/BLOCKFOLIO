@@ -1,0 +1,73 @@
+/* Base Component Styles */
+
+/* Card Components */
+.base-card {
+  @apply bg-white rounded-xl shadow-sm border border-neutral-200;
+  padding: var(--component-padding-md);
+}
+
+.base-card--glass {
+  @apply bg-white/80 backdrop-blur-sm border-white/20 shadow-lg;
+}
+
+.base-card--hover {
+  @apply transition-all duration-200 hover:shadow-md hover:scale-[1.02];
+}
+
+/* Button Components */
+.base-button {
+  @apply font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  padding: var(--component-padding-sm) var(--component-padding-md);
+}
+
+.base-button--primary {
+  @apply bg-brand-600 hover:bg-brand-700 text-white focus:ring-brand-500;
+}
+
+.base-button--secondary {
+  @apply bg-neutral-200 hover:bg-neutral-300 text-neutral-800 focus:ring-neutral-500;
+}
+
+.base-button--success {
+  @apply bg-success-600 hover:bg-success-700 text-white focus:ring-success-500;
+}
+
+.base-button--danger {
+  @apply bg-error-600 hover:bg-error-700 text-white focus:ring-error-500;
+}
+
+/* Input Components */
+.base-input {
+  @apply w-full px-3 py-2 border border-neutral-300 rounded-lg;
+  @apply focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent;
+  @apply transition-colors duration-200;
+}
+
+.base-input--error {
+  @apply border-error-500 focus:ring-error-500;
+}
+
+.base-input--success {
+  @apply border-success-500 focus:ring-success-500;
+}
+
+/* Modal Components */
+.base-modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+}
+
+.base-modal-content {
+  @apply bg-white rounded-xl shadow-2xl max-h-[90vh] overflow-y-auto;
+}
+
+.base-modal-header {
+  @apply flex items-center justify-between p-6 border-b border-neutral-200;
+}
+
+.base-modal-body {
+  padding: var(--component-padding-lg);
+}
+
+.base-modal-footer {
+  @apply flex items-center justify-end space-x-3 p-6 border-t border-neutral-200;
+}

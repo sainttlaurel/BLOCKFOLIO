@@ -1,0 +1,891 @@
+/* ===== PROFESSIONAL TRADING PLATFORM RESPONSIVE BREAKPOINT SYSTEM ===== */
+
+/* Custom CSS Properties for Breakpoint Values */
+:root {
+  /* Breakpoint Values */
+  --breakpoint-mobile: 767px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-tablet-max: 1199px;
+  --breakpoint-desktop: 1200px;
+  
+  /* Transition Durations */
+  --transition-fast: 200ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+  --transition-layout: 400ms;
+  
+  /* Easing Functions */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-professional: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Layout Dimensions */
+  --desktop-portfolio-width: 25%;
+  --desktop-market-width: 50%;
+  --desktop-trading-width: 25%;
+  --tablet-market-width: 60%;
+  --tablet-trading-width: 40%;
+  
+  /* Spacing Values */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+}
+
+/* ===== CORE RESPONSIVE BREAKPOINT MIXINS ===== */
+
+/* Mobile-First Media Query Utilities */
+.responsive-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  transition: all var(--transition-layout) var(--ease-professional);
+}
+
+/* Desktop Container (≥1200px) */
+@media (min-width: 1200px) {
+  .responsive-container {
+    max-width: 1400px;
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+/* Tablet Container (768px-1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .responsive-container {
+    max-width: 1024px;
+    padding: 0 var(--spacing-md);
+  }
+}
+
+/* Mobile Container (<768px) */
+@media (max-width: 767px) {
+  .responsive-container {
+    max-width: 480px;
+    padding: 0 var(--spacing-sm);
+  }
+}
+
+/* ===== LAYOUT TRANSITION SYSTEM ===== */
+
+/* Base Layout Transition Classes */
+.layout-transition {
+  transition: all var(--transition-layout) var(--ease-professional);
+  will-change: transform, opacity, width, height;
+}
+
+.layout-transition-fast {
+  transition: all var(--transition-normal) var(--ease-professional);
+}
+
+.layout-transition-slow {
+  transition: all var(--transition-slow) var(--ease-professional);
+}
+
+/* Smooth Transform Transitions */
+.smooth-transform {
+  transition: transform var(--transition-normal) var(--ease-smooth);
+}
+
+.smooth-transform:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Professional Fade Transitions */
+.fade-transition {
+  transition: opacity var(--transition-normal) var(--ease-professional);
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeInSmooth var(--transition-normal) var(--ease-professional) forwards;
+}
+
+.fade-out {
+  opacity: 1;
+  animation: fadeOutSmooth var(--transition-normal) var(--ease-professional) forwards;
+}
+
+/* Slide Transitions for Layout Changes */
+.slide-transition {
+  transition: transform var(--transition-layout) var(--ease-professional);
+}
+
+.slide-in-left {
+  transform: translateX(-100%);
+  animation: slideInLeft var(--transition-layout) var(--ease-professional) forwards;
+}
+
+.slide-in-right {
+  transform: translateX(100%);
+  animation: slideInRight var(--transition-layout) var(--ease-professional) forwards;
+}
+
+.slide-in-up {
+  transform: translateY(100%);
+  animation: slideInUp var(--transition-layout) var(--ease-professional) forwards;
+}
+
+.slide-in-down {
+  transform: translateY(-100%);
+  animation: slideInDown var(--transition-layout) var(--ease-professional) forwards;
+}
+
+/* ===== BREAKPOINT-SPECIFIC LAYOUT CLASSES ===== */
+
+/* Desktop Layout System (≥1200px) */
+.desktop-layout {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .desktop-layout {
+    display: grid;
+    grid-template-columns: var(--desktop-portfolio-width) var(--desktop-market-width) var(--desktop-trading-width);
+    grid-template-areas: "portfolio market trading";
+    gap: var(--spacing-lg);
+    height: calc(100vh - 8rem);
+    transition: all var(--transition-layout) var(--ease-professional);
+  }
+  
+  .desktop-portfolio {
+    grid-area: portfolio;
+    transition: all var(--transition-layout) var(--ease-professional);
+  }
+  
+  .desktop-market {
+    grid-area: market;
+    transition: all var(--transition-layout) var(--ease-professional);
+  }
+  
+  .desktop-trading {
+    grid-area: trading;
+    transition: all var(--transition-layout) var(--ease-professional);
+  }
+}
+
+/* Tablet Layout System (768px-1199px) */
+.tablet-layout {
+  display: none;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .tablet-layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    transition: all var(--transition-layout) var(--ease-professional);
+  }
+  
+  .tablet-portfolio-section {
+    order: 1;
+    transition: all var(--transition-slow) var(--ease-professional);
+  }
+  
+  .tablet-main-section {
+    order: 2;
+    display: grid;
+    grid-template-columns: var(--tablet-market-width) var(--tablet-trading-width);
+    gap: var(--spacing-md);
+    min-height: 500px;
+    transition: all var(--transition-layout) var(--ease-professional);
+  }
+  
+  .tablet-charts-section {
+    order: 3;
+    transition: all var(--transition-slow) var(--ease-professional);
+  }
+  
+  .tablet-market {
+    transition: all var(--transition-layout) var(--ease-professional);
+  }
+  
+  .tablet-trading {
+    transition: all var(--transition-layout) var(--ease-professional);
+  }
+}
+
+/* Mobile Layout System (<768px) */
+.mobile-layout {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobile-layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    min-height: 100vh;
+    transition: all var(--transition-layout) var(--ease-professional);
+  }
+  
+  .mobile-portfolio-summary {
+    order: 1;
+    transition: all var(--transition-normal) var(--ease-professional);
+  }
+  
+  .mobile-tab-navigation {
+    order: 2;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: all var(--transition-normal) var(--ease-professional);
+  }
+  
+  .mobile-tab-content {
+    order: 3;
+    flex: 1;
+    transition: all var(--transition-layout) var(--ease-professional);
+  }
+  
+  .mobile-bottom-sheet {
+    order: 4;
+    transition: all var(--transition-normal) var(--ease-professional);
+  }
+}
+
+/* ===== COLLAPSIBLE SECTION ANIMATIONS ===== */
+
+/* Enhanced Collapsible Content Transitions */
+.collapsible-content {
+  overflow: hidden;
+  transition: all var(--transition-slow) var(--ease-professional);
+  transform-origin: top;
+}
+
+.collapsible-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  transform: scaleY(0);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.collapsible-content.expanded {
+  max-height: 2000px;
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.collapsible-content.expanding {
+  animation: expandSection var(--transition-slow) var(--ease-professional) forwards;
+}
+
+.collapsible-content.collapsing {
+  animation: collapseSection var(--transition-slow) var(--ease-professional) forwards;
+}
+
+/* Collapsible Button Animations */
+.collapsible-button {
+  transition: all var(--transition-normal) var(--ease-professional);
+  transform-origin: center;
+}
+
+.collapsible-button:hover {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.collapsible-button:active {
+  transform: translateY(0) scale(0.99);
+  transition-duration: var(--transition-fast);
+}
+
+.collapsible-icon {
+  transition: transform var(--transition-normal) var(--ease-professional);
+}
+
+.collapsible-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* ===== TAB NAVIGATION ANIMATIONS ===== */
+
+/* Mobile Tab Transitions */
+.mobile-tab-button {
+  position: relative;
+  transition: all var(--transition-normal) var(--ease-professional);
+  overflow: hidden;
+}
+
+.mobile-tab-button::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width var(--transition-normal) var(--ease-professional);
+}
+
+.mobile-tab-button.active::before {
+  width: 100%;
+}
+
+.mobile-tab-button:hover {
+  transform: translateY(-1px);
+}
+
+.mobile-tab-button:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: var(--transition-fast);
+}
+
+/* Tab Panel Transitions */
+.mobile-tab-panel {
+  transition: all var(--transition-layout) var(--ease-professional);
+}
+
+.mobile-tab-panel.entering {
+  animation: tabSlideIn var(--transition-layout) var(--ease-professional) forwards;
+}
+
+.mobile-tab-panel.exiting {
+  animation: tabSlideOut var(--transition-layout) var(--ease-professional) forwards;
+}
+
+/* ===== CARD AND COMPONENT ANIMATIONS ===== */
+
+/* Professional Card Hover Effects */
+.professional-card {
+  transition: all var(--transition-normal) var(--ease-professional);
+  transform-origin: center;
+}
+
+.professional-card:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.professional-card:active {
+  transform: translateY(0) scale(1);
+  transition-duration: var(--transition-fast);
+}
+
+/* Market Data Card Animations */
+.market-card {
+  transition: all var(--transition-normal) var(--ease-professional);
+}
+
+.market-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Portfolio Value Animation */
+.portfolio-value-display {
+  transition: all var(--transition-normal) var(--ease-professional);
+}
+
+.portfolio-value-display.updating {
+  animation: valueUpdate var(--transition-normal) var(--ease-professional);
+}
+
+/* Price Change Animations */
+.price-change-positive {
+  animation: priceFlashGreen var(--transition-normal) var(--ease-professional);
+}
+
+.price-change-negative {
+  animation: priceFlashRed var(--transition-normal) var(--ease-professional);
+}
+
+/* ===== SCROLL AND OVERFLOW ANIMATIONS ===== */
+
+/* Smooth Scrolling */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  transition: scroll-position var(--transition-normal) var(--ease-professional);
+}
+
+/* Custom Scrollbar with Transitions */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  transition: scrollbar-color var(--transition-normal) var(--ease-professional);
+}
+
+.custom-scrollbar:hover {
+  scrollbar-color: rgba(156, 163, 175, 0.8) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+  transition: background var(--transition-normal) var(--ease-professional);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.8);
+}
+
+/* ===== LOADING AND STATE ANIMATIONS ===== */
+
+/* Loading State Transitions */
+.loading-state {
+  transition: all var(--transition-normal) var(--ease-professional);
+}
+
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeletonLoading 1.5s infinite;
+}
+
+/* Error State Animations */
+.error-state {
+  animation: errorShake 0.5s var(--ease-professional);
+}
+
+/* Success State Animations */
+.success-state {
+  animation: successPulse 0.6s var(--ease-professional);
+}
+
+/* ===== KEYFRAME ANIMATIONS ===== */
+
+@keyframes fadeInSmooth {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutSmooth {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes expandSection {
+  from {
+    max-height: 0;
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    max-height: 2000px;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes collapseSection {
+  from {
+    max-height: 2000px;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
+@keyframes tabSlideIn {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes tabSlideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes valueUpdate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+  100% {
+    transform: scale(1);
+    background-color: transparent;
+  }
+}
+
+@keyframes priceFlashGreen {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(34, 197, 94, 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes priceFlashRed {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(239, 68, 68, 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes skeletonLoading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes errorShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+@keyframes layoutExpand {
+  from {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes layoutContract {
+  from {
+    transform: scale(1.02);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes transitionIndicator {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+@keyframes preloadKeyframes {
+  0% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+/* Responsive breakpoint specific animations */
+@keyframes desktopLayoutEnter {
+  from {
+    grid-template-columns: 0% 100% 0%;
+    opacity: 0.5;
+  }
+  to {
+    grid-template-columns: var(--desktop-portfolio-width) var(--desktop-market-width) var(--desktop-trading-width);
+    opacity: 1;
+  }
+}
+
+@keyframes tabletLayoutEnter {
+  from {
+    transform: translateY(20px);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes mobileLayoutEnter {
+  from {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ===== ACCESSIBILITY AND REDUCED MOTION ===== */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .layout-transition,
+  .layout-transition-fast,
+  .layout-transition-slow,
+  .smooth-transform,
+  .fade-transition,
+  .slide-transition,
+  .collapsible-content,
+  .collapsible-button,
+  .mobile-tab-button,
+  .mobile-tab-panel,
+  .professional-card,
+  .market-card,
+  .portfolio-value-display {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .professional-card,
+  .market-card {
+    border: 2px solid;
+  }
+  
+  .collapsible-button:hover,
+  .mobile-tab-button:hover {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
+}
+
+/* ===== ENHANCED TRANSITION SYSTEM ===== */
+
+/* Transition Direction Classes */
+.transition-expanding {
+  animation: layoutExpand var(--transition-layout) var(--ease-professional) forwards;
+}
+
+.transition-contracting {
+  animation: layoutContract var(--transition-layout) var(--ease-professional) forwards;
+}
+
+.transitioning {
+  position: relative;
+}
+
+.transitioning::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 49%, rgba(59, 130, 246, 0.1) 50%, transparent 51%);
+  background-size: 20px 20px;
+  animation: transitionIndicator 2s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* Layout-specific transition classes */
+.desktop-layout.transitioning {
+  transform: scale(1.01);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.tablet-layout.transitioning {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-layout.transitioning {
+  transform: scale(1.02);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+}
+
+/* Component transition states */
+.portfolio-transitioning {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(147, 51, 234, 0.05));
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.market-transitioning {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(59, 130, 246, 0.05));
+  border-color: rgba(34, 197, 94, 0.2);
+}
+
+.trading-transitioning {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(34, 197, 94, 0.05));
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+/* GPU acceleration for smooth animations */
+.layout-transition,
+.smooth-transform,
+.professional-card,
+.collapsible-content {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize repaints */
+.fade-transition,
+.slide-transition {
+  will-change: opacity, transform;
+}
+
+.collapsible-content {
+  will-change: max-height, opacity, transform;
+}
+
+.mobile-tab-panel {
+  will-change: transform, opacity;
+}
+
+/* Enhanced will-change management */
+.layout-transition.transitioning {
+  will-change: transform, opacity, box-shadow;
+}
+
+.layout-transition:not(.transitioning) {
+  will-change: auto;
+}
+
+/* Remove will-change after animations complete */
+.animation-complete {
+  will-change: auto;
+}
+
+/* Preload critical animations */
+.preload-animations {
+  animation: preloadKeyframes 0.001s;
+}
+
+/* Container queries for enhanced responsiveness */
+@container (min-width: 1200px) {
+  .container-responsive {
+    --layout-type: desktop;
+  }
+}
+
+@container (min-width: 768px) and (max-width: 1199px) {
+  .container-responsive {
+    --layout-type: tablet;
+  }
+}
+
+@container (max-width: 767px) {
+  .container-responsive {
+    --layout-type: mobile;
+  }
+}

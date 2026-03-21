@@ -1,0 +1,439 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Browser compatibility fixes */
+@import './styles/browser-compatibility-fixes.css';
+
+/* Mobile optimizations */
+@import './styles/mobile-optimizations.css';
+
+/* Responsive typography system */
+@import './styles/responsive-typography.css';
+
+/* Basic styling for the trading platform */
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .input-field {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200;
+  }
+  
+  .stat-card {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-4;
+  }
+}
+
+@layer utilities {
+  .animate-transition {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .animate-hover-lift {
+    @apply hover:transform hover:-translate-y-1 hover:shadow-md transition-all duration-200;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-chart-data {
+    animation: chartDataLoad 1s ease-out;
+  }
+  
+  .animate-price-flash-up {
+    animation: priceFlashUp 0.6s ease-out;
+  }
+  
+  .animate-price-flash-down {
+    animation: priceFlashDown 0.6s ease-out;
+  }
+  
+  .animate-hover-scale {
+    @apply hover:scale-105 transition-transform duration-200;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chartDataLoad {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes priceFlashUp {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(34, 197, 94, 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes priceFlashDown {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(239, 68, 68, 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Loading states */
+.loading-skeleton {
+  @apply animate-pulse bg-gray-200 rounded;
+}
+
+/* Focus states for accessibility - WCAG 2.1 Level AA compliant */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2; /* Changed from blue-500 to blue-600 for 3:1 contrast */
+}
+
+/* Market colors - WCAG 2.1 Level AA compliant */
+.text-market-positive {
+  @apply text-green-700; /* Changed from 600 to 700 for 4.5:1 contrast on white */
+}
+
+.text-market-negative {
+  @apply text-red-700; /* Changed from 600 to 700 for 4.5:1 contrast on white */
+}
+
+.bg-market-positive {
+  @apply bg-green-50;
+}
+
+.bg-market-negative {
+  @apply bg-red-50;
+}
+
+/* Professional spacing */
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Responsive grid */
+.grid-responsive {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4;
+}
+
+/* Professional shadows */
+.shadow-professional {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.shadow-professional-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* High Contrast Mode - WCAG AAA Compliant (7:1 contrast ratio) */
+.high-contrast {
+  /* CSS Custom Properties for High Contrast Mode */
+  --hc-bg-primary: #000000;
+  --hc-bg-secondary: #1a1a1a;
+  --hc-bg-tertiary: #2d2d2d;
+  --hc-text-primary: #ffffff;
+  --hc-text-secondary: #e0e0e0;
+  --hc-border: #ffffff;
+  --hc-positive: #00ff00;
+  --hc-negative: #ff0000;
+  --hc-link: #00ffff;
+  --hc-link-hover: #00cccc;
+  --hc-focus: #ffff00;
+  --hc-button-bg: #ffffff;
+  --hc-button-text: #000000;
+  --hc-button-hover-bg: #ffff00;
+  --hc-button-hover-text: #000000;
+}
+
+/* High Contrast Mode Styles */
+.high-contrast body {
+  background-color: var(--hc-bg-primary);
+  color: var(--hc-text-primary);
+}
+
+.high-contrast .bg-white,
+.high-contrast .bg-gray-50,
+.high-contrast .bg-gray-100 {
+  background-color: var(--hc-bg-secondary) !important;
+  color: var(--hc-text-primary) !important;
+}
+
+.high-contrast .bg-gray-200 {
+  background-color: var(--hc-bg-tertiary) !important;
+  color: var(--hc-text-primary) !important;
+}
+
+.high-contrast .text-gray-600,
+.high-contrast .text-gray-700,
+.high-contrast .text-gray-800,
+.high-contrast .text-gray-900 {
+  color: var(--hc-text-primary) !important;
+}
+
+.high-contrast .text-gray-500 {
+  color: var(--hc-text-secondary) !important;
+}
+
+.high-contrast .border-gray-200,
+.high-contrast .border-gray-300 {
+  border-color: var(--hc-border) !important;
+}
+
+/* High contrast market colors */
+.high-contrast .text-market-positive,
+.high-contrast .text-green-600,
+.high-contrast .text-green-700 {
+  color: var(--hc-positive) !important;
+  font-weight: 600;
+}
+
+.high-contrast .text-market-negative,
+.high-contrast .text-red-600,
+.high-contrast .text-red-700 {
+  color: var(--hc-negative) !important;
+  font-weight: 600;
+}
+
+.high-contrast .bg-market-positive,
+.high-contrast .bg-green-50,
+.high-contrast .bg-green-100 {
+  background-color: #003300 !important;
+  color: var(--hc-positive) !important;
+}
+
+.high-contrast .bg-market-negative,
+.high-contrast .bg-red-50,
+.high-contrast .bg-red-100 {
+  background-color: #330000 !important;
+  color: var(--hc-negative) !important;
+}
+
+/* High contrast buttons */
+.high-contrast .btn-primary,
+.high-contrast .bg-blue-600,
+.high-contrast .bg-blue-700 {
+  background-color: var(--hc-button-bg) !important;
+  color: var(--hc-button-text) !important;
+  border: 2px solid var(--hc-border) !important;
+  font-weight: 700;
+}
+
+.high-contrast .btn-primary:hover,
+.high-contrast .bg-blue-600:hover,
+.high-contrast .bg-blue-700:hover {
+  background-color: var(--hc-button-hover-bg) !important;
+  color: var(--hc-button-hover-text) !important;
+}
+
+.high-contrast .btn-secondary {
+  background-color: var(--hc-bg-tertiary) !important;
+  color: var(--hc-text-primary) !important;
+  border: 2px solid var(--hc-border) !important;
+  font-weight: 700;
+}
+
+.high-contrast .btn-secondary:hover {
+  background-color: var(--hc-button-hover-bg) !important;
+  color: var(--hc-button-hover-text) !important;
+}
+
+/* High contrast links */
+.high-contrast a {
+  color: var(--hc-link) !important;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.high-contrast a:hover {
+  color: var(--hc-link-hover) !important;
+}
+
+/* High contrast focus states - Enhanced visibility */
+.high-contrast *:focus,
+.high-contrast .focus-ring:focus {
+  outline: 3px solid var(--hc-focus) !important;
+  outline-offset: 2px !important;
+}
+
+/* High contrast inputs */
+.high-contrast .input-field,
+.high-contrast input,
+.high-contrast select,
+.high-contrast textarea {
+  background-color: var(--hc-bg-secondary) !important;
+  color: var(--hc-text-primary) !important;
+  border: 2px solid var(--hc-border) !important;
+}
+
+.high-contrast .input-field:focus,
+.high-contrast input:focus,
+.high-contrast select:focus,
+.high-contrast textarea:focus {
+  border-color: var(--hc-focus) !important;
+  outline: 3px solid var(--hc-focus) !important;
+}
+
+/* High contrast cards */
+.high-contrast .card,
+.high-contrast .stat-card {
+  background-color: var(--hc-bg-secondary) !important;
+  border: 2px solid var(--hc-border) !important;
+  color: var(--hc-text-primary) !important;
+}
+
+/* High contrast shadows - Replace with borders */
+.high-contrast .shadow-sm,
+.high-contrast .shadow,
+.high-contrast .shadow-md,
+.high-contrast .shadow-lg,
+.high-contrast .shadow-professional,
+.high-contrast .shadow-professional-lg {
+  box-shadow: none !important;
+  border: 2px solid var(--hc-border) !important;
+}
+
+/* High contrast navigation */
+.high-contrast nav {
+  background-color: var(--hc-bg-secondary) !important;
+  border-bottom: 3px solid var(--hc-border) !important;
+}
+
+/* High contrast primary colors */
+.high-contrast .text-primary-600,
+.high-contrast .text-blue-600 {
+  color: var(--hc-link) !important;
+  font-weight: 600;
+}
+
+.high-contrast .bg-primary-50,
+.high-contrast .bg-blue-50 {
+  background-color: var(--hc-bg-tertiary) !important;
+  border: 2px solid var(--hc-link) !important;
+}
+
+/* High contrast charts - Ensure visibility */
+.high-contrast canvas {
+  border: 2px solid var(--hc-border) !important;
+}
+
+/* High contrast tables */
+.high-contrast table {
+  border: 2px solid var(--hc-border) !important;
+}
+
+.high-contrast th,
+.high-contrast td {
+  border: 1px solid var(--hc-border) !important;
+  color: var(--hc-text-primary) !important;
+}
+
+.high-contrast thead {
+  background-color: var(--hc-bg-tertiary) !important;
+}
+
+.high-contrast tbody tr:hover {
+  background-color: var(--hc-bg-tertiary) !important;
+}
+
+/* High contrast loading states */
+.high-contrast .loading-skeleton {
+  background-color: var(--hc-bg-tertiary) !important;
+  border: 1px solid var(--hc-border) !important;
+}
+
+/* High contrast scrollbar */
+.high-contrast ::-webkit-scrollbar-track {
+  background: var(--hc-bg-secondary);
+}
+
+.high-contrast ::-webkit-scrollbar-thumb {
+  background: var(--hc-border);
+  border: 1px solid var(--hc-text-primary);
+}
+
+.high-contrast ::-webkit-scrollbar-thumb:hover {
+  background: var(--hc-text-primary);
+}
+
+/* High contrast disabled states */
+.high-contrast button:disabled,
+.high-contrast input:disabled {
+  background-color: var(--hc-bg-tertiary) !important;
+  color: var(--hc-text-secondary) !important;
+  border-color: var(--hc-text-secondary) !important;
+  opacity: 0.6;
+}
+
+/* High contrast modals */
+.high-contrast .modal,
+.high-contrast [role="dialog"] {
+  background-color: var(--hc-bg-primary) !important;
+  border: 3px solid var(--hc-border) !important;
+}
+
+/* High contrast tooltips */
+.high-contrast .tooltip,
+.high-contrast [role="tooltip"] {
+  background-color: var(--hc-bg-secondary) !important;
+  color: var(--hc-text-primary) !important;
+  border: 2px solid var(--hc-border) !important;
+}

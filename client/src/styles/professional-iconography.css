@@ -1,0 +1,171 @@
+/**
+ * Professional Iconography Styles
+ * 
+ * Implements professional icon styling for financial applications following
+ * fintech design standards with consistent visual hierarchy and accessibility.
+ */
+
+/* ===== BASE ICON STYLING ===== */
+.financial-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  flex-shrink: 0;
+}
+
+.financial-icon.interactive {
+  cursor: pointer;
+}
+
+.financial-icon.interactive:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+.financial-icon.interactive:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+}
+
+.financial-icon.interactive:focus {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ===== SIZE-SPECIFIC STYLING ===== */
+.icon-xs { width: 12px; height: 12px; }
+.icon-sm { width: 16px; height: 16px; }
+.icon-md { width: 20px; height: 20px; }
+.icon-lg { width: 24px; height: 24px; }
+.icon-xl { width: 32px; height: 32px; }
+.icon-2xl { width: 40px; height: 40px; }
+.icon-3xl { width: 48px; height: 48px; }
+
+/* ===== TRADING-SPECIFIC ICON STYLES ===== */
+.price-movement-icon {
+  transition: all 0.3s ease-in-out;
+}
+
+.price-up-icon {
+  color: var(--color-market-green-600);
+  animation: price-pulse-up 2s ease-in-out infinite;
+}
+
+.price-down-icon {
+  color: var(--color-market-red-600);
+  animation: price-pulse-down 2s ease-in-out infinite;
+}
+
+.price-flat-icon {
+  color: var(--color-neutral-500);
+}
+
+/* ===== ICON ANIMATIONS ===== */
+@keyframes price-pulse-up {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scale(1.05);
+  }
+}
+
+@keyframes price-pulse-down {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scale(0.95);
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.7; 
+    transform: scale(1.1);
+  }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.icon-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-inline {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Icon spacing utilities */
+.icon-mr-1 { margin-right: 4px; }
+.icon-mr-2 { margin-right: 8px; }
+.icon-mr-3 { margin-right: 12px; }
+.icon-ml-1 { margin-left: 4px; }
+.icon-ml-2 { margin-left: 8px; }
+.icon-ml-3 { margin-left: 12px; }
+
+/* Icon opacity utilities */
+.icon-opacity-50 { opacity: 0.5; }
+.icon-opacity-75 { opacity: 0.75; }
+.icon-opacity-90 { opacity: 0.9; }
+
+/* Icon rotation utilities */
+.icon-rotate-90 { transform: rotate(90deg); }
+.icon-rotate-180 { transform: rotate(180deg); }
+.icon-rotate-270 { transform: rotate(270deg); }
+
+/* Icon flip utilities */
+.icon-flip-x { transform: scaleX(-1); }
+.icon-flip-y { transform: scaleY(-1); }
+
+/* ===== RESPONSIVE ICON SCALING ===== */
+@media (max-width: 768px) {
+  .icon-responsive-sm { width: 16px; height: 16px; }
+  .icon-responsive-md { width: 20px; height: 20px; }
+  .icon-responsive-lg { width: 24px; height: 24px; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .icon-responsive-sm { width: 18px; height: 18px; }
+  .icon-responsive-md { width: 22px; height: 22px; }
+  .icon-responsive-lg { width: 26px; height: 26px; }
+}
+
+@media (min-width: 1025px) {
+  .icon-responsive-sm { width: 20px; height: 20px; }
+  .icon-responsive-md { width: 24px; height: 24px; }
+  .icon-responsive-lg { width: 28px; height: 28px; }
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+@media (prefers-contrast: high) {
+  .financial-icon {
+    filter: contrast(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .financial-icon,
+  .price-up-icon,
+  .price-down-icon {
+    animation: none;
+    transition: none;
+  }
+}
