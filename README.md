@@ -1,21 +1,32 @@
 # Blockfolio (Temporary) 
 
-Just a chill crypto dashboard turned professional-ish trading platform.  
-Built with React, because why not. Real-time data, smooth UI, and some lazy dev magic.
+A crypto dashboard that somehow turned into a semi-overbuilt trading platform.
+Built with React because I had time, curiosity, and no plan to stop halfway this time.
 
 ---
 
 ## Overview
 
-We took a basic crypto dashboard and gave it a glow-up.  
+This started as a simple crypto dashboard.
+Then I kept adding stuff… and now it looks like a “professional” trading app (kind of).
 
-**Goal:** Make trading less painful and more visual — fast charts, smooth updates, easy portfolio vibes.
+## Let’s be clear:
 
-**Focus:**  
-- Portfolio-first layout (because money matters)  
-- Sexy charts, not boring numbers  
-- Real-time updates, like “oh that just changed”  
-- Quick trading flow, less clicking, more sipping coffee ☕
+- JNot built by professionals
+- JNot a real trading platform
+- JNot financial advice
+- Just a solo project that got out of hand
+
+---
+
+## Goal
+
+Make crypto tracking and trading feel less painful:
+
+- Portfolio-first view (see your stuff immediately)
+- Charts that actually look good
+- Fast updates so things don’t feel dead
+- Less clicking, more doing
 
 More detailed requirements & design: [Click here](https://file.kiwi/cbc2e8b0#SpqfZ20pidgKHlBakNFzCw)
 
@@ -83,11 +94,35 @@ client/src/
 
 ---
 
+## Why I Built This
+
+I had time.
+I didn’t want to waste it.
+So instead of dropping another project halfway, I kept going.
+
+## Now it’s this weird mix of:
+
+overbuilt features
+random optimizations
+things I learned the hard way
+
+---
+
 ## Notes
+- Solo project
+- Built slowly, inconsistently, and sometimes lazily
+- Overthought in some parts, underthought in others
 
-- Just a solo project, built lazily and incrementally. Made by a coder who overthinks everything I see. Mermaid diagrams rendering on GitHub is pretty cool, btw.
+I’ll probably keep updating this whenever I feel like it.
 
-P.S. I’ll often update this in the future and proceed with tasks one by one.
+---
+
+## Final Thought
+
+If you’re expecting something polished and industry-level — this isn’t it.
+If you want to see a project that someone actually finished (even imperfectly) — then this is that.
+
+Built by someone with too much time and no clear roadmap
 
 ![welp](https://github.com/user-attachments/assets/69dc1e14-2689-4c7b-aa75-ab742323f499)
 
