@@ -12,10 +12,10 @@ Then I kept adding stuff… and now it looks like a “professional” trading a
 
 ## Let’s be clear:
 
-- JNot built by professionals
-- JNot a real trading platform
-- JNot financial advice
-- Just a solo project that got out of hand
+- Not built by professionals
+- Not a real trading platform
+- Not financial advice
+- ust a solo project that got out of hand
 
 ---
 
